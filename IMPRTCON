@@ -1,0 +1,10 @@
+//IMPRTCON JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,      
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                            
+//STEP01   EXEC PGM=IDCAMS                                    
+//SYSPRINT DD SYSOUT=*                                        
+//SYSIN DD *                                                  
+  IMPORT CONNECT -                                            
+  OBJECTS((CATALOG.USER.EMRE  -                               
+  DEVICETYPE(3390) -                                          
+  VOLUMES(OZG002)))                                           
+/*                                                            

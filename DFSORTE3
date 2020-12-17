@@ -1,0 +1,16 @@
+//DFSORTE3 JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,         
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                               
+//STEP1    EXEC PGM=ICEMAN                                       
+//SYSOUT   DD   SYSOUT=A                                         
+//SORTIN   DD   DSN=IBMUSER.OZGUR.SORT.SAMPIN,DISP=SHR           
+//SORTOUT  DD   DSN=IBMUSER.OZGUR.SORT.SAMPOUT,DISP=SHR          
+//SYSIN    DD   *                                                
+ INCLUDE COND=(166,4,BI,GT,162,4,BI,AND,106,4,CH,EQ,C'COR')      
+ SORT FIELDS=(1,75,CH,D)                                         
+//* INCLUDE COND=(115,5,CH,EQ,C'00032',OR,115,5,CH,EQ,C'10347')  
+//* SORT FIELDS=(115,5,CH,A)                                     
+//* OMIT COND=(110,5,CH,EQ,C' ')                                 
+//* SORT FIELDS=(1,75,CH,A)                                      
+/*                                                               
+//* 'INCLUDE' CONTROL STATEMENT TO COLLECT WANTED RECORDS        
+//* 'OMIT' CONTROL STATEMENT TO EXCLUDE UNWANTED RECORDS         

@@ -1,0 +1,14 @@
+//IMPORTIN JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,   
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                         
+//IMPORT EXEC PGM=IDCAMS                                   
+//SOURCE   DD DSNAME=CATALOG.USER.EMRE.CATBACK,DISP=OLD    
+//SYSPRINT DD SYSOUT=A                                     
+//SYSIN    DD *                                            
+     IMPORT -                                              
+           INFILE(SOURCE) -                                
+           OUTDATASET(CATALOG.USER.EMRE) -                 
+           ALIAS -                                         
+           LOCK -                                          
+           INTOEMPTY -                                     
+           CATALOG(CATALOG.MASTER.M23CAT)                  
+/*                                                         

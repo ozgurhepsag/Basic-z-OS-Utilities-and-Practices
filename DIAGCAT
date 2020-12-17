@@ -1,0 +1,21 @@
+//DIAGCAT  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,      
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                            
+//DIAGNOSE EXEC PGM=IDCAMS                                    
+//SYSPRINT DD SYSOUT=*                                        
+//DIAGDD DD DISP=SHR,DSN=CATALOG.USER.EMRE                    
+//SYSIN DD *                                                  
+ DIAGNOSE ICFCATALOG INFILE(DIAGDD)                           
+//EXAMINE1 EXEC PGM=IDCAMS                                    
+//SYSPRINT DD SYSOUT=*                                        
+//SYSIN DD *                                                  
+ EXAMINE NAME(CATALOG.USER.EMRE) -                            
+ INDEXTEST NODATATEST ERRORLIMIT(1000)                        
+//EXAMINE2 EXEC PGM=IDCAMS                                    
+//SYSPRINT DD SYSOUT=*                                        
+//SYSIN DD *                                                  
+ EXAMINE NAME(CATALOG.USER.EMRE) -                            
+ NOINDEXTEST DATATEST ERRORLIMIT(1000)                        
+//LISTCAT EXEC PGM=IDCAMS                                     
+//SYSPRINT DD SYSOUT=*                                        
+//SYSIN DD *                            
+ LISTCAT CAT(CATALOG.USER.EMRE) ALL     

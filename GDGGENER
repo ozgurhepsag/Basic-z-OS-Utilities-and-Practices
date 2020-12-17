@@ -1,0 +1,28 @@
+//GDGGENER JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,   
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                         
+//GDGSTEP1 EXEC PGM=IDCAMS                                 
+//SYSPRINT DD  SYSOUT=*                                    
+//SYSIN    DD  *                                           
+           DEFINE GDG(NAME(IBMUSER.OZGUR.GDG)   -          
+           LIMIT(3)                           -            
+           NOEMPTY                            -            
+           SCRATCH)                                        
+/*                                                         
+//GDGSTEP2 EXEC PGM=IEFBR14                                
+//GDGMODLD DD  DSN=IBMUSER.OZGUR.GDG(+1),                  
+//         DISP=(NEW,CATLG,DELETE),                        
+//         UNIT=SYSDA,                                     
+//         SPACE=(TRK,(1,2)),                              
+//         DCB=(LRECL=50,RECFM=FB)                         
+//GDGSTEP3 EXEC PGM=IEFBR14                
+//GDGMODLD DD  DSN=IBMUSER.OZGUR.GDG(+2),  
+//         DISP=(NEW,CATLG,DELETE),        
+//         UNIT=SYSDA,                     
+//         SPACE=(TRK,(1,2)),              
+//         DCB=(LRECL=50,RECFM=FB)         
+//GDGSTEP4 EXEC PGM=IEFBR14                
+//GDGMODLD DD  DSN=IBMUSER.OZGUR.GDG(+3),  
+//         DISP=(NEW,CATLG,DELETE),        
+//         UNIT=SYSDA,                     
+//         SPACE=(TRK,(1,2)),              
+//         DCB=(LRECL=50,RECFM=FB)         

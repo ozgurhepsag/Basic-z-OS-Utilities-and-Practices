@@ -1,0 +1,14 @@
+//DCOLLECT JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                      
+//STEP1    EXEC PGM=IDCAMS                              
+//SYSPRINT DD   SYSOUT=A                                
+//OUTDS    DD   DSN=USER.DCOLLECT.OUTPUT,DSORG=PS,      
+//         DCB=(RECFM=VB,LRECL=644,BLKSIZE=0),          
+//         SPACE=(1,(100,100)),AVGREC=K,                
+//         DISP=(NEW,CATLG,DELETE)                      
+//SYSIN    DD   *                                       
+           DCOLLECT -                                   
+               OFILE(OUTDS) -                           
+               STORAGEGROUP(SCUSR) -                    
+               NODATAINFO                               
+/*                                                      

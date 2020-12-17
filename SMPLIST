@@ -1,0 +1,10 @@
+//SMPLIST  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,      
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                            
+//LIST     EXEC PGM=GIMSMP                                    
+//SMPCSI   DD   DISP=SHR,DSN=SMPE.GLOBAL.CSI                  
+//SMPLIST  DD   SYSOUT=*                                      
+//SMPLOG   DD   SYSOUT=*                                      
+//SMPCNTL  DD   *                                             
+  SET BDY(GLOBAL).                                            
+  LIST FMIDSET.                                               
+  LIST FUNCTIONS.                                             

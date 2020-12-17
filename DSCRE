@@ -1,0 +1,9 @@
+//CREATE   JOB  (),NOTIFY=&SYSUID                               
+//STEP1    EXEC PGM=IEFBR14                                     
+//DD1      DD   DSN=OZGUR.SMS.DENEME,DISP=(NEW,CATLG),          
+//         SPACE=(TRK,(1,1),RLSE),                              
+//         DCB=(RECFM=FB,LRECL=80) VOL=SER=OZG001,              
+//DD2      DD   DSN=IBMUSER.OZGUR.SMS.DENEM2,DISP=(NEW,CATLG),  
+//         SPACE=(TRK,(1,1),RLSE),                              
+//         DCB=(RECFM=FB,LRECL=80) VOL=SER=OZG001,              
+/*                                                              

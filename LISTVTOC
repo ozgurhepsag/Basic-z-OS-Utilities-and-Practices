@@ -1,0 +1,8 @@
+//LISTVTOC JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,  
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                        
+//STEP1    EXEC PGM=IEHLIST,REGION=512K                   
+//SYSPRINT  DD SYSOUT=*                                   
+//VOLUME   DD  DISP=SHR,UNIT=3390,VOL=SER=NOS001          
+//SYSIN    DD  *                                          
+     LISTVTOC VOL=3390=NOS001,FORMAT                      
+/*                                                        

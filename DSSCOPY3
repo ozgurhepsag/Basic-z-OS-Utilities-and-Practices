@@ -1,0 +1,16 @@
+//DSSCOPY3 JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,         
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                               
+//STEP2   EXEC PGM=ADRDSSU,REGION=0M PARM=('TYPRUN=NORUN')       
+//SYSPRINT DD  SYSOUT=*                                          
+//SYSUDUMP DD  SYSOUT=*                                          
+//SYSIN    DD  *                                                 
+ COPY                                  -                         
+       DATASET(                        -                         
+                INCLUDE (IBMUSER.**)) -                          
+  OUTDYNAM((NOS001))                   -                         
+  TOL(ENQF)   -                                                  
+  CATALOG    -                                                   
+  ALLEXCP    -                                                   
+  ALLDATA(*) -                                                   
+  RENAMEUNCONDITIONAL((IBMUSER.**, OZGUR.IBMUSER.**))            
+/*                                                               

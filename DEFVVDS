@@ -1,0 +1,11 @@
+//DEFVVDS  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,    
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                          
+//DEFINE EXEC PGM=IDCAMS                                    
+//SYSPRINT DD SYSOUT=A                                      
+//SYSIN DD *                                                
+ DEFINE CLUSTER -                                           
+ (NAME(SYS1.VVDS.VNOS001) -                                 
+ TRACKS(10 10) -                                            
+ VOLUMES(NOS001) -                                          
+ NONINDEXED)                                                
+/*                                                          

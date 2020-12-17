@@ -1,0 +1,8 @@
+//LISTVVDS JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,  
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                        
+//DELLIBS  EXEC PGM=IDCAMS                                
+//SYSPRINT DD  SYSOUT=A                                   
+//INFILE DD DISP=SHR,DSN=SYS1.VVDS.VNOS001                
+//SYSIN DD *                                              
+  PRINT INFILE(INFILE) CHAR                               
+/*                                                        

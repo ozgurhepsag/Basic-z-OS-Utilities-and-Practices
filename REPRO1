@@ -1,0 +1,13 @@
+//REPRO1   JOB   (SPG1,1),'IBMUSER',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,  
+//   REGION=0M,NOTIFY=&SYSUID                                           
+//STEP01  EXEC PGM=IDCAMS                                               
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN DD *                                                            
+ /* DELETE (SMSZ21.V2R1.SCDS2) CL */                                    
+   DEFINE CLUSTER (NAME(SMS.VBTPLEX.SCDS2) LINEAR VOL(SYSP02) -         
+                   CYL(10 10) SHR(3,3))                                 
+   IF LASTCC EQ 0                        -                              
+   THEN                                  -                              
+      REPRO  IDS(SMS.VBTPLEX.SCDS1)      -                              
+             ODS(SMS.VBTPLEX.SCDS2)                                     
+/*                                                                      
