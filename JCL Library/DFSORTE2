@@ -1,0 +1,10 @@
+//DFSORTE2 JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,   
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                         
+//STEP1    EXEC PGM=ICEMAN                                 
+//SYSOUT   DD   SYSOUT=A                                   
+//SORTIN01 DD   DSN=IBMUSER.OZGUR.SORT.MERGE1,DISP=SHR     
+//SORTIN02 DD   DSN=IBMUSER.OZGUR.SORT.MERGE2,DISP=SHR     
+//SORTOUT  DD   DSN=IBMUSER.OZGUR.SORT.SAMPOUT,DISP=SHR    
+//SYSIN    DD   *                                          
+ MERGE FIELDS=(110,5,CH,A,1,75,CH,A)                       
+/*                                                         

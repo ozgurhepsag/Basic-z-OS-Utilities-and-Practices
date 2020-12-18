@@ -1,8 +1,0 @@
-//LISTCAT2 JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,     
-//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                           
-//STEP01  EXEC PGM=IDCAMS                                    
-//SYSPRINT DD  SYSOUT=A                                      
-//SYSIN DD *                                                 
-  LISTCAT ENTRIES(CATALOG.USER.*) -                          
-          ALL                                                
-/*                                                           

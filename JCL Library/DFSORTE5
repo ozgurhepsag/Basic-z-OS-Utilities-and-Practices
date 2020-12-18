@@ -1,0 +1,11 @@
+//DFSORTE5 JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,    
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                          
+//STEP1    EXEC PGM=SORT                                    
+//SORTIN   DD   DSN=IBMUSER.OZGUR.TEMP,DISP=SHR             
+//SYSOUT   DD   *                                           
+//SORTOUT  DD   *                                           
+//SYSIN    DD   *                                           
+ SORT FIELDS=(30,10,CH,A)                                   
+ SUM FIELDS=NONE                                            
+//* SUM FIELDS=(45,3,ZD)                                    
+/*                                                          

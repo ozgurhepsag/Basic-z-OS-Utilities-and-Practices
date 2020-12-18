@@ -1,0 +1,5 @@
+//JES2CHK  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,    
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                          
+//JES2CHK EXEC PGM=HASJESCK                                 
+//HASPLIST DD SYSOUT=*                                      
+//HASPPARM DD DISP=SHR,DSN=SYS1.VBT1.PARMLIB(JES2VBT1)      

@@ -1,9 +1,0 @@
-//GDGADD   JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,       
-//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                             
-//GDGSTEP1 EXEC PGM=IEFBR14                                    
-//GDG      DD  DSN=IBMUSER.OZGUR.GDG(+1),                      
-//         DISP=(NEW,CATLG,DELETE),                            
-//         UNIT=SYSDA,                                         
-//         SPACE=(TRK,(1,2)),                                  
-//         DCB=(LRECL=50,RECFM=FB)                             
-//                                                             

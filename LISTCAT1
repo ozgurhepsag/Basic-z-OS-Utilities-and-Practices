@@ -1,9 +1,0 @@
-//LISTCAT1 JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,  
-//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                        
-//DELLIBS EXEC PGM=IDCAMS                                 
-//SYSPRINT DD  SYSOUT=A                                   
-//SYSIN DD *                                              
-  LISTCAT      -                                          
-  NAMES        -                                          
-  CAT(CATALOG.MASTER.M23CAT)                              
-/*                                                        

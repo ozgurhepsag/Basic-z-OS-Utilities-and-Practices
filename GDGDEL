@@ -1,8 +1,0 @@
-//GDGDEL   JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M, 
-//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                       
-//GDGSTEP1 EXEC PGM=IDCAMS                               
-//SYSPRINT DD  SYSOUT=*                                  
-//SYSOUT   DD  SYSOUT=*                                  
-//SYSIN    DD  *                                         
-  DELETE IBMUSER.OZGUR.GDG GDG FORCE                     
-/*                                                       

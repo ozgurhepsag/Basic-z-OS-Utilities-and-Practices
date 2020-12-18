@@ -1,0 +1,9 @@
+//INSERLOG JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,                  
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                                        
+//********************************************************************    
+//* CLEAR AND INITIALIZE HARDWARE EVENT RECORDER DATASET             *    
+//********************************************************************    
+//IFCDIP00 EXEC PGM=IFCDIP00                                              
+//SERERDS  DD  DSN=SYS1.VBT1.LOGREC,DISP=OLD,                             
+//             VOL=SER=PAG001,          <-- CHANGE TO SYSRES VOLSER       
+//             UNIT=3390                <-- CHANGE TO SYSRES UNIT         

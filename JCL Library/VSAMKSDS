@@ -1,0 +1,15 @@
+//VSMAKSDA JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,        
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                              
+//STEP1  EXEC PGM=IDCAMS                                        
+//SYSPRINT DD  SYSOUT=*                                         
+//SYSIN    DD  *                                                
+   DEFINE CLUSTER (NAME(OZGUR.VSAM.KSDSFILE) -                  
+   INDEXED                                 -                    
+   RECSZ(80 80)                            -                    
+   TRACKS(1,1)                             -                    
+   KEYS(5  0)                              -                    
+   CISZ(4096)                              -                    
+   FREESPACE(3 3) )                        -                    
+   DATA (NAME(OZGUR.VSAM.KSDSFILE.DATA))   -                    
+   INDEX (NAME(OZGUR.VSAM.KSDSFILE.INDEX))                      
+/*                                                              

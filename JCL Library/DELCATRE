@@ -1,0 +1,9 @@
+//DELCATRE JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,  
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                        
+//DELCAT EXEC PGM=IDCAMS                                  
+//SYSPRINT DD SYSOUT=A                                    
+//SYSIN DD *                                              
+  DELETE CATALOG.USER.EMRE -                              
+  RECOVERY -                                              
+  USERCATALOG                                             
+/*                                                        

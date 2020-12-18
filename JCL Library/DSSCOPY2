@@ -1,0 +1,16 @@
+//OZGUR1   JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,     
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                           
+//ADRDSSU  EXEC PGM=ADRDSSU,REGION=0M PARM='TYPRUN=NORUN'    
+//SYSPRINT DD SYSOUT=*                                       
+//SYSIN    DD *                                              
+ COPY  -                                                     
+   DS(INC(IBMUSER.**))  -                                    
+       LOGINDYNAM ( -                                        
+           (USR001) -                                        
+           (USR002) -                                        
+           ) -                                               
+       OUTDYNAM(OZG001) -                                    
+       BYPASSACS(**) -                                       
+       DELETE -                                              
+       CATALOG                                               
+//                                                           

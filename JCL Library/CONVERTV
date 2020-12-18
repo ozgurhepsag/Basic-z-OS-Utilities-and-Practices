@@ -1,0 +1,12 @@
+//CONVERTV JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                      
+//STEP1    EXEC  PGM=ADRDSSU                            
+//SYSPRINT DD    SYSOUT=*                               
+//DVOL1    DD    UNIT=3390,VOL=SER=OZG001,DISP=OLD      
+//DVOL2    DD    UNIT=3390,VOL=SER=OZG002,DISP=OLD      
+//DVOL3    DD    UNIT=3390,VOL=SER=OZG003,DISP=OLD      
+//SYSIN    DD    *                                      
+  CONVERTV -                                            
+     DDNAME(DVOL1, DVOL2, DVOL3) -                      
+     SMS                                                
+/*                                                      

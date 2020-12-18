@@ -1,8 +1,0 @@
-//UNLOCKC  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,   
-//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                         
-//LOCKCAT EXEC PGM=IDCAMS                                  
-//SYSPRINT DD SYSOUT=A                                     
-//SYSIN DD *                                               
- ALTER CATALOG.USER.EMRE UNLOCK                            
- ALTER CATALOG.USER.OZGUR UNLOCK                           
-/*                                                         

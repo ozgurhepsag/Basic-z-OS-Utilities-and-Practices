@@ -1,9 +1,0 @@
-//INITVOL  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,    
-//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                          
-//INITD    EXEC PGM=ICKDSF,PARM='NOREPLYLU,FORCE'           
-//SYSPRINT DD   SYSOUT=*                                    
-//SYSIN    DD   *                                           
- INIT UNIT(1010) VTOC(0,1,140) NVFY PRG VOLID(OZG001)       
- INIT UNIT(1011) VTOC(0,1,140) NVFY PRG VOLID(OZG002)       
- INIT UNIT(1012) VTOC(0,1,140) NVFY PRG VOLID(OZG003)       
-/*                                                          
