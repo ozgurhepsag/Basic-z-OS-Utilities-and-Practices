@@ -1,0 +1,12 @@
+//PS2PDS   JOB  (SPG1,1),'OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,   
+//   REGION=4M,NOTIFY=&SYSUID                                           
+//STEP1    EXEC PGM=IEBGENER                                            
+//SYSPRINT DD  SYSOUT=A                                                 
+//SYSUT1   DD  DSNAME=IBMUSER.OZGUR.TMPX,UNIT=3390,DISP=(OLD,DELETE)    
+//SYSUT2   DD  DSNAME=IBMUSER.OZGUR.TEMPX,UNIT=3390,DISP=(NEW,CATLG,),  
+//             SPACE=(TRK,(10,5,20)),                                   
+//             DCB=(RECFM=FB,LRECL=133,BLKSIZE=0)                       
+//SYSIN    DD  *                                                        
+      GENERATE  MAXNAME=1,MAXGPS=1                                      
+      MEMBER  NAME=MEMBER1                                              
+/*                                                                      

@@ -1,0 +1,9 @@
+//RUNREXX  JOB   (SPG1,1),'OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,    
+//   REGION=4M,NOTIFY=&SYSUID                                             
+//PRINT    EXEC PGM=IKJEFT01,DYNAMNBR=30,REGION=4096K                     
+//SYSEXEC  DD DSN=IBMUSER.OZGUR.REXXLIB,DISP=SHR                          
+//SYSTSPRT DD SYSOUT=X                                                    
+//SYSTSIN  DD *                                                           
+  EXECUTIL SEARCHDD(YES)                                                  
+  %TERMDEF                                                                
+/*                                                                        

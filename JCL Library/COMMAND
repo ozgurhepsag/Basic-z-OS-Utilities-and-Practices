@@ -1,0 +1,8 @@
+//COMMANDX JOB   (SPG1,1),'OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,      
+//   REGION=0M,NOTIFY=&SYSUID                                               
+//STEP1    EXEC PGM=COMMAND                                                 
+//SYSPRINT DD  SYSOUT=*                                                     
+//IEFRDER  DD  *                                                            
+D T                                                                         
+DELAY=5                                                                     
+D A,L                                                                       

@@ -1,0 +1,10 @@
+//MERGECAT JOB CLASS=A,NOTIFY=&SYSUID,COND=(0,NE)           
+//DEFUCAT  EXEC PGM=IDCAMS,REGION=0M                        
+//SYSPRINT DD SYSOUT=*                                      
+   REPRO INDATASET(CATALOG.MASTER.OMCAT1) -                 
+         OUTDATASET(CATALOG.USER.OSYSP1) -                  
+         MERGECAT  -                                        
+         LEVEL(OZGUR)                                     
+//DEFUCAT  EXEC PGM=IDCAMS,REGION=0M                        
+//SYSPRINT DD SYSOUT=*                                      
+   DEFINE ALIAS(NAME(OZGUR) RELATE(CATALOG.USER.OSYSP1))  

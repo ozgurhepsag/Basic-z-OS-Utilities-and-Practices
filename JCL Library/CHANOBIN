@@ -1,0 +1,13 @@
+//CHANOBIN JOB (SPG1,1),'OZGUR',MSGCLASS=X,                  
+//       MSGLEVEL=(1,1)                                        
+//SORT1     EXEC PGM=SORT,REGION=0M                            
+//SYSOUT    DD   SYSOUT=*                                      
+//SORTIN    DD   DSN=SYSTEMP.PROD.COMMSLOG.EX3,            
+//          DISP=SHR                                           
+//SORTOUT   DD   DSN=SYSTEMP.PROD.COMMSLOG.EX3.NOBIN,      
+//          LRECL=133,RECFM=FB,SPACE=(CYL,(10,10),RLSE),       
+//          DISP=(NEW,CATLG,DELETE)                            
+//SYSIN     DD   *                                             
+   OPTION COPY                                                 
+   OUTREC FINDREP=(INOUT=(X'00',C' '))                         
+/*                                                             

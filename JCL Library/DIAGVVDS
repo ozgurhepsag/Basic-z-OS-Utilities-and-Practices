@@ -1,0 +1,11 @@
+//DIAGVVDS JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,   
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                                        
+//STEP01   EXEC  PGM=IDCAMS                                                
+//DIAGDD   DD  DISP=SHR,DSN=SYS1.VVDS.VOZG002                              
+//SYSPRINT DD  SYSOUT=X                                                    
+//SYSIN    DD   *                                                          
+      DIAGNOSE          -                                                  
+           VVDS         -                                                  
+           INFILE(DIAGDD) LIST                                             
+/*                                                                         
+//                                                                         

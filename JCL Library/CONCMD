@@ -1,0 +1,4 @@
+//CONCMD   JOB   (SPG1,1),'OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=H,  
+//   REGION=0M,NOTIFY=&SYSUID                                           
+//*JES  COMMAND '$T CKPTDEF,CKPT2=(DSN=SYS1.THY1.CKPT2,VOL=OCKPT1)'     
+//STEP1 EXEC PGM=IEFBR14                                                

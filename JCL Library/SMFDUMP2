@@ -1,0 +1,14 @@
+//SMFDUMP2 JOB  CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,NOTIFY=&SYSUID 
+//STEP1    EXEC PGM=IFASMFDP,REGION=5M                           
+//DUMPIN   DD   DISP=SHR,DSN=BACKUP12.PS0.PX12.SMFDUMP.D130715   
+//OUTDD1   DD   DSN=SYS2.PS0.PX12.T307079.D130715.TEMP,          
+//         DISP=(,CATLG),UNIT=3390,VOL=SER=PTEMP1,               
+//         SPACE=(CYL,(100,250),RLSE),                           
+//         DCB=(RECFM=VBS,LRECL=32756,BLKSIZE=32760)             
+//SYSPRINT DD   SYSOUT=*                                         
+//SYSIN    DD   *                                                
+  INDD(DUMPIN,OPTIONS(ALL))                                      
+  OUTDD(OUTDD1,TYPE(30,70:79))                                   
+  START(0000)                                                    
+  END(2400)                                                      
+/*                                                               

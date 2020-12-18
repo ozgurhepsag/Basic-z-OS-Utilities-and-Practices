@@ -1,0 +1,7 @@
+//DELMEMXX JOB   (SPG1,1),'OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,    
+//   REGION=0M                                            
+//EMPTY  EXEC  PGM=IDCAMS                                                 
+//SYSPRINT DD  SYSOUT=*                                                   
+//DD1      DD  DISP=SHR,DSN=IBMUSER.DENEME.JCL                            
+//SYSIN    DD  *                                                          
+    DELETE IBMUSER.DENEME.JCL(RMF*) FILE(DD1)                             

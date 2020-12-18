@@ -1,0 +1,13 @@
+//COPYPDS  JOB   (SPG1,1),'OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,
+//   REGION=4M,NOTIFY=&SYSUID                                         
+//STEP1    EXEC PGM=IEBCOPY                                           
+//SYSPRINT DD SYSOUT=*                                                
+//SYSUT1   DD DSN=DSNAME,DISP=SHR                                     
+//SYSUT2   DD DSN=DSNAME,DISP=(NEW,CATLG),                            
+//     SPACE=(CYL,(1,1,45)),                                          
+//     DCB=(RECFM=FB,LRECL=80,BLKSIZE=0),                             
+//     UNIT=UNIT,                                                     
+//     VOL=SER=VOLSER                                                 
+//SYSIN    DD *                                                       
+    COPY INDD=SYSUT1,OUTDD=SYSUT2                                     
+/*                                                                    

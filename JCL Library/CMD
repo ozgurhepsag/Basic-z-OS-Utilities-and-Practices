@@ -1,0 +1,5 @@
+//OZGURC    JOB  (SPG1,1),'OZGUR',CLASS=A,                   
+//          MSGLEVEL=(1,1),MSGCLASS=X,NOTIFY=&SYSUID     
+//CMD      COMMAND 'D PARMLIB'                                   
+//STEP1    EXEC PGM=IEFBR14                                      
+//IEFRDER  DD  *                                                 

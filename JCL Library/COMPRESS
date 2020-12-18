@@ -1,0 +1,28 @@
+//TSOZA03A JOB 3ES10G10000012,'TSOZA03',MSGCLASS=Q,MSGLEVEL=(1,1),      
+//         NOTIFY=&SYSUID,CLASS=A,REGION=6M                             
+//*   JOB  SUBMITTED FROM TSOZA03.ES10.CNTL(LAB7#11)               ***  
+//*   DOC: OVERWRITE DD STATEMENTS ON A INSTREAM PROCEDURE         ***  
+//*   CHANGE TSOZA03 TO YOUR TSO USERID                            ***  
+//COMP     PROC                                                         
+//*****   MAKE BACKUP                                                   
+//S1       EXEC PGM=IEBCOPY                                             
+//SYSPRINT DD   SYSOUT=*                                                
+//SYSUT1   DD   DISP=SHR,DSN=TSOZA03.ES10.CNTL                          
+//SYSUT2   DD   DISP=(,CATLG),DSN=TSOZA03.ES10.BACK,                    
+//         LIKE=TSOZA03.ES10.CNTL                                       
+//SYSIN    DD   DUMMY                                                   
+//IFOK1    IF   (S1.RC=0) THEN                                          
+//*****   COMPRESS DATASET                                              
+//S2       EXEC PGM=IEBCOPY                                             
+//SYSPRINT DD   SYSOUT=*                                                
+//SYSUT1   DD   DISP=SHR,DSN=TSOZA03.ES10.CNTL                          
+//SYSUT2   DD   DISP=OLD,DSN=TSOZA03.ES10.CNTL                          
+//SYSIN    DD   DUMMY                                                   
+//IFOKEND1 ENDIF                                                        
+//IFOK2    IF   (S2.RC=0) THEN                                          
+//*****   COMPRESS SUCCESSFUL, DELETE BACKUP                            
+//S3       EXEC PGM=IEFBR14                                             
+//DD1      DD   DISP=(OLD,DELETE),DSN=TSOZA03.ES10.BACK                 
+//IFOKEND2 ENDIF         
+//         PEND          
+//FINAL    EXEC COMP     

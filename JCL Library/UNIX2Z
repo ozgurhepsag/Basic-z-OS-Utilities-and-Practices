@@ -1,0 +1,9 @@
+//UNIX2Z   JOB   (SPG1,1),'OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X, 
+//   REGION=4M,NOTIFY=&SYSUID                                          
+//COPYSTEP EXEC PGM=IKJEFT01                                           
+//INHFS    DD PATH='/u/ozgur/deneme',PATHOPTS=(ORDONLY)              
+//OUTMVS   DD DSN=IBMUSER.OZGUR.TEMP(FROMUNIX),DISP=SHR                
+//SYSTSPRT DD SYSOUT=*                                                 
+//SYSTSIN  DD *                                                        
+OCOPY INDD(INHFS) OUTDD(OUTMVS) TEXT CONVERT(YES) PATHOPTS(USE)        
+/*                                                                     
