@@ -1,0 +1,83 @@
+These commands are the commands that I use frequently. I will add more when I remember or learn.
+
+D A,L
+
+D IPLINFO
+D IOS,CONFIG
+
+D PARMLIB
+D SYMBOLS	
+
+D U,,,3200
+D U,,,3200,3
+V 3200,[ONLINE || OFFLINE]
+V 700,CONSOLE => 0700 adresli device'i konsol yap
+
+D SMS
+D SMS,SG(ALL)
+D SMS,VOL(volser)
+
+DISPLAY SMF
+DISPLAY SMF,O
+DISPLAY SMF,M    =>  Display the record types that are being collected.
+
+D LOGREC
+DISPLAY LOGGER
+D LOGGER,STR   =>  Display logstreams defined to any structure
+D LOGGER,L     =>  Display logstream sysplex information
+D LOGGER,CONN  =>  Display all logstreams with connections to the system		  	
+
+DISPLAY XCF,C
+DISPLAY XCF,C,TYPE=LOGR
+
+SWITCH SMF (i smf)
+
+DISPLAY M=DEV(xxx)
+DISPLAY M=CHP(cc)
+DISPLAY M=CHP
+
+DS P,xxxx,1 (DEVSERV PATHS)
+
+D PROG,LNKLST
+D PROG,APF
+
+D LLA  (Library Lookaside) 
+MODIFY LLA,REFRESH
+MODIFY LLA,UPDATE=xx
+
+D DIAG
+
+F CATALOG,OPEN  => LIST ALL CATALOGS
+MODIFY CATALOG,ALLOCATED   => ALLOCATED CATALOGS (F CATALOG,ALLOCATED)
+F CATALOG,REPORT
+F CATALOG,REPORT,PERFORMANCE
+F CATALOG,REPORT,PERFORMANCE(RESET)
+F CATALOG,REPORT,CATSTATX([catname or mask])
+F CATALOG,REPORT,CATSTATS([catname or mask or blank])
+F CATALOG,REPORT,CACHE
+F CATALOG,LIST
+F CATALOG,ENTRY
+F CATALOG,NOISC(CAT)  => disable an ICF catalog from default caching
+F CATALOG,ECSHR(STATUS) 
+F CATALOG,CONTENTION
+F CATALOG,RECOVER,LOCK([UCAT])
+F CATALOG,RECOVER,UNLOCK([UCAT])
+F CATALOG,RECOVER,SUSPEND([UCAT])
+F CATALOG,RECOVER,RESUME([UCAT])
+F CATALOG,VLF || F CATALOG,ISC   => Are VLF or ISC active?
+
+D ETR         => Display the status of STP or the Sysplex Timer
+D CF
+
+DEVSERV QDASD,TYPE=ALL  => ALL OF THE DISK STORAGE
+
+D GRS
+D GRS,C       => Display GRS contention information
+
+$D CKPTDEF  
+$D ACTIVATE
+$D SPL
+$D SPOOLDEF 
+$T CKPTDEF,RECON=Y	 =>  Initiate JES2 checkpoint reconfiguration dialog.
+$T SPOOLDEF,…
+
