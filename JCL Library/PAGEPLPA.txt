@@ -1,0 +1,14 @@
+//PAGEPLPA JOB   (SPG1,1),'@OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,             
+//   REGION=0M,NOTIFY=@OZGUR                                                      
+//*                                                                                
+//*PAGE VSAM DATASET ALLOCATE                                                      
+//*                                                                                
+//DEFPAGE  EXEC PGM=IDCAMS,REGION=1M                                               
+//SYSPRINT DD SYSOUT=*                                                             
+//SYSUT1   DD DISP=OLD,UNIT=3390,VOL=SER=OPAG02                                    
+  DEFINE PAGESPACE(  -                                                             
+      FILE(SYSUT1) -                                                               
+      NAME(PAGE.VBT1.LOCALX) -                                                     
+      CYLINDERS(4369) -                                                            
+      VOLUME(OPAG02))                                                              
+//                                                                                 

@@ -1,0 +1,14 @@
+//ALLOCSPL JOB   (SPG1,1),'OZGUR',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,
+//   REGION=0M,NOTIFY=@OZGUR                                         
+//ALLOCT   EXEC PGM=IEBDG                                             
+//SPOOLDS  DD   DSN=SYS1.VBT1.HASPACE,UNIT=3390,                      
+//         VOL=SER=OSPL01,DISP=(NEW,KEEP),                            
+//         SPACE=(CYL,10015,,CONTIG),DSNTYPE=LARGE,                   
+//         DCB=(DSORG=PSU,RECFM=U,BLKSIZE=3992,LRECL=3992)            
+//SYSPRINT DD   SYSOUT=A                                              
+//SYSIN    DD   *                                                     
+ DSD OUTPUT=(SPOOLDS)                                                 
+ FD NAME=SPOOL,FILL=X'FF',LENGTH=3992                                 
+ CREATE NAME=(SPOOL),QUANTITY=99999999                                
+ END                                                                  
+/*                                                                    
