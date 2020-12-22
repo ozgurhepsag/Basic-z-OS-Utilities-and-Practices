@@ -1,0 +1,19 @@
+//LGRECPOL JOB  (SPG1,1),'LOGREC LOGSTREAM',          
+//          CLASS=A,                                 
+//          MSGCLASS=X,                              
+//          MSGLEVEL=(1,1),NOTIFY=&SYSUID                                                    
+//STEP20    EXEC PGM=IXCMIAPU                        
+//SYSPRINT  DD   SYSOUT=*                            
+//SYSABEND  DD   SYSOUT=*                            
+//SYSIN     DD   *                                   
+    DATA TYPE (LOGR) REPORT(YES)                     
+    DELETE LOGSTREAM NAME(SYSPLEX.LOGREC.ALLRECS)    => IF EXISTED
+    DEFINE STRUCTURE NAME(VBTPLEX_LOGREC)             
+           LOGSNUM(1)                                
+           AVGBUFSIZE(4068)                          
+           MAXBUFSIZE(4068)                          
+    DEFINE LOGSTREAM NAME(SYSPLEX.LOGREC.ALLRECS)    
+          STRUCTNAME(VBTPLEX_LOGREC)                  
+          LS_SIZE(90000)                             
+          RETPD(0)                                   
+          AUTODELETE(NO)                             
