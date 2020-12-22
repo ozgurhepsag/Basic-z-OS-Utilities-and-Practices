@@ -1,4 +1,4 @@
-These commands are the commands that I use frequently. I will add more when I remember or learn.
+These operator commands are the commands that I use frequently. I will add more when I remember or learn from my experiences.
 
 D A,L
 
@@ -11,7 +11,10 @@ D SYMBOLS
 D U,,,3200
 D U,,,3200,3
 V 3200,[ONLINE || OFFLINE]
-V 700,CONSOLE => 0700 adresli device'i konsol yap
+V 0700,CONSOLE => 0700 adresli device'i konsol yap
+
+D M
+D M=CPU
 
 D SMS
 D SMS,SG(ALL)
@@ -22,13 +25,25 @@ DISPLAY SMF,O
 DISPLAY SMF,M    =>  Display the record types that are being collected.
 
 D LOGREC
+
 DISPLAY LOGGER
-D LOGGER,STR   =>  Display logstreams defined to any structure
-D LOGGER,L     =>  Display logstream sysplex information
-D LOGGER,CONN  =>  Display all logstreams with connections to the system		  	
+SETLOGRC LOGSTREAM
+D LOGGER,LOGSTREAM    =>  Display logstream sysplex information
+D LOGGER,LOGSTREAM,LSNAME=[lsname]
+D LOGGER,STR   =>  Display logstreams defined to any structure  
+D LOGGER,CONNECTION  =>  Display all logstreams with connections to the system		  	
 
 DISPLAY XCF,C
 DISPLAY XCF,C,TYPE=LOGR
+D XCF,COUPLE,TYPE=SYSPLEX 
+D XCF,STR
+D XCF,STR,STRNAME=[strname]
+D XCF,SYSPLEX
+
+D C            =>   Display consoles
+V OPERLOG,HARDCPY
+D C,HC,L=Z 
+D C,HC
 
 SWITCH SMF (i smf)
 
@@ -36,6 +51,7 @@ DISPLAY M=DEV(xxx)
 DISPLAY M=CHP(cc)
 DISPLAY M=CHP
 
+DEVSERV QDASD,TYPE=ALL  => ALL OF THE DISK STORAGE
 DS P,xxxx,1 (DEVSERV PATHS)
 
 D PROG,LNKLST
@@ -69,15 +85,19 @@ F CATALOG,VLF || F CATALOG,ISC   => Are VLF or ISC active?
 D ETR         => Display the status of STP or the Sysplex Timer
 D CF
 
-DEVSERV QDASD,TYPE=ALL  => ALL OF THE DISK STORAGE
+D ASM
 
 D GRS
 D GRS,C       => Display GRS contention information
-
-$D CKPTDEF  
+ 
 $D ACTIVATE
 $D SPL
 $D SPOOLDEF 
-$T CKPTDEF,RECON=Y	 =>  Initiate JES2 checkpoint reconfiguration dialog.
+$D CKPTDEF 
+$T CKPTDEF,NEWCKPT1=(STRNAME=[JES2strname])
+$T CKPTDEF,RECONFIG=YES	 =>  Initiate JES2 checkpoint reconfiguration dialog.
 $T SPOOLDEF,…
 
+RO *ALL,[command]    => Route commands to all systems in the sysplex
+RO *OTHER,[]
+RO sysname,[command]
