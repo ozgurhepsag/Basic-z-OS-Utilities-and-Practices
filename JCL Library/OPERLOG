@@ -1,0 +1,19 @@
+//OPERLOG   JOB  (SPG1,1),'TK11 LOGSTREAM',             
+//          CLASS=A,                                    
+//          MSGCLASS=X,                                 
+//          MSGLEVEL=(1,1),NOTIFY=&SYSUID,              
+//STEP20    EXEC PGM=IXCMIAPU                           
+//SYSPRINT  DD   SYSOUT=*                               
+//SYSABEND  DD   SYSOUT=*                               
+//SYSIN     DD   *                                      
+     DATA TYPE(LOGR) REPORT(YES)                                    
+     DEFINE STRUCTURE NAME(VBTPLEX_OPERLOG)              
+     LOGSNUM(1)                                         
+     MAXBUFSIZE(4092)                                   
+     AVGBUFSIZE(512)                                    
+     DEFINE LOGSTREAM NAME(SYSPLEX.OPERLOG)             
+         DESCRIPTION(SYSPLEX_OPERLOG )                  
+         STRUCTNAME(VBTPLEX_OPERLOG)                     
+         LS_SIZE(90000)                                 
+         AUTODELETE(NO)                                 
+         RETPD(0)                                       
