@@ -1,4 +1,4 @@
-//OPERLOG   JOB  (SPG1,1),'TK11 LOGSTREAM',             
+//OPERLOG   JOB  (SPG1,1),'OPERLOG LOGSTREAM',             
 //          CLASS=A,                                    
 //          MSGCLASS=X,                                 
 //          MSGLEVEL=(1,1),NOTIFY=&SYSUID,              
