@@ -1,0 +1,29 @@
+ACTIVE                                                                
+RECORDING(LOGSTREAM)                                                  
+DEFAULTLSNAME(IFASMF.&SYSNAME..DEFAULT)                               
+LSNAME(IFASMF.&SYSNAME..SCRT,TYPE(70,89))                             
+SID(&SYSNAME.)                                                        
+PROMPT(LIST)                    /* DO NOT PROMPT OPERATOR           */
+REC(PERM)                       /* TYPE 17 PERM RECORDS ONLY        */
+MAXDORM(3000)                   /* WRITE IDLE BUFFER AFTER 30 MIN   */
+STATUS(010000)                  /* WRITE SMF STATS AFTER 1 HOUR     */
+JWT(0300)                       /* 522 AFTER 30 MINUTES             */
+INTVAL(15)                                                            
+MEMLIMIT(NOLIMIT)                                                     
+BUFUSEWARN(75)                                                        
+LISTDSN                         /* LIST DATA SET STATUS AT IPL      */
+SYS(NOTYPE(40,60,62:64,66,68,69,92(10:11,16),99(1:13)),               
+EXITS(IEFU83,IEFU84,IEFACTRT,                                         
+      IEFUTL,IEFUSI,IEFUJI,IEFU29),NOINTERVAL,NODETAIL)               
+/*SYS(NOTYPE(1:255),EXITS(IEFU83,IEFU84,IEFACTRT,                   */
+/* WRITE ALL EXCEPT DATA MANAGEMENT RECORDS, TAKE EXITS.            */
+/* NOTE: JES EXITS CONTROLED BY JES , THERE IS NO                   */   
+/* DEFAULT INTERVAL RECORDS WRITTEN AND ONLY SUMMARY T32            */   
+/* RECORDS AS A DEFAULT FOR TSO.                                    */   
+SUBSYS(STC,EXITS(IEFU29,IEFU83,IEFU84,IEFUJP,IEFUSO,IEFACTRT),           
+              INTERVAL(SMF,SYNC))                                        
+/* WRITE RECORDS ACCORDING TO SYS VALUE, TAKE ONLY FIVE             */   
+/* EXITS, NOTE: IEFU29 EXECUTES IN THE MASTER ASID WHICH IS A       */   
+/* STC ADDRESS SPACE SO IEFU29 MUST BE ON FOR STC.                  */   
+/* USE ALL OTHER SYS PARMETERS AS A DEFAULT.                        */   
+/*                                                                  */   

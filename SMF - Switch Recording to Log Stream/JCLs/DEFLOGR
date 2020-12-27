@@ -1,0 +1,21 @@
+//DEFLOGR  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,        
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                              
+//DEFINELS EXEC PGM=IXCMIAPU                                    
+//SYSPRINT DD   SYSOUT=*                                        
+//SYSABEND DD   SYSOUT=*                                        
+//SYSIN    DD   *                                               
+     DATA TYPE(LOGR) REPORT(YES)                                
+     DEFINE LOGSTREAM NAME(IFASMF.VBT1.SCRT)                    
+         DESCRIPTION(SYS_SCRT_RECORDS)                          
+         DASDONLY(YES)                                          
+         STG_SIZE(2000)                                         
+         LS_SIZE(10000)                                         
+         AUTODELETE(YES)                                        
+         RETPD(180)                                             
+     DEFINE LOGSTREAM NAME(IFASMF.VBT1.DEFAULT)                 
+         DESCRIPTION(SYSTEM_OTHER_REC)                          
+         DASDONLY(YES)                                          
+         STG_SIZE(50000)                                        
+         LS_SIZE(250000)                                        
+         AUTODELETE(YES)        
+         RETPD(60)              

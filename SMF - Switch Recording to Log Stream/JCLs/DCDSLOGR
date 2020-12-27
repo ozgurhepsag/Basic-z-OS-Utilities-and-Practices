@@ -1,0 +1,23 @@
+//DCDSLOGR JOB (SPG1,1),'DEFINE CDS',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,  
+// NOTIFY=&SYSUID,REGION=0M                                              
+//******************************************************************     
+//STEP10   EXEC PGM=IXCL1DSU                                             
+//STEPLIB  DD   DSN=SYS1.MIGLIB,DISP=SHR                                 
+//SYSPRINT DD   SYSOUT=*                                                 
+//SYSIN    DD   *                                                        
+     DEFINEDS SYSPLEX(VBTPLEX)                                            
+              DSN(SYS1.VBT1.LOGR.CDS01) VOLSER(CPL001)                 
+              CATALOG STORCLAS(SCNONSMS)                                 
+          DATA TYPE(LOGR)                                                
+               ITEM NAME(LSR) NUMBER(2000)                               
+               ITEM NAME(LSTRR) NUMBER(10)                               
+               ITEM NAME(DSEXTENT) NUMBER(10)                            
+               ITEM NAME(SMDUPLEX) NUMBER(1)                             
+     DEFINEDS SYSPLEX(VBTPLEX)                                            
+              DSN(SYS1.VBT1.LOGR.CDS02) VOLSER(CPL002)                 
+              CATALOG STORCLAS(SCNONSMS)                                 
+          DATA TYPE(LOGR)                                                
+               ITEM NAME(LSR) NUMBER(2000)                 
+               ITEM NAME(LSTRR) NUMBER(10)                 
+               ITEM NAME(DSEXTENT) NUMBER(10)              
+               ITEM NAME(SMDUPLEX) NUMBER(1)               
