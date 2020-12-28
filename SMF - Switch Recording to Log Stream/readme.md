@@ -60,7 +60,7 @@ I already have couple datasets in my system, so I don't do anything for this ste
 
 SMS manages the DASD log data sets and staging data sets, because system logger uses SMS to allocate data sets, such as the DASD log stream and staging data sets. 
 
-Therefore, I created just a storage group and a storage class for log streams and ACS routines need to be updated so that right classes assign to log streams. Then, SCDS have to be translated, validated and activated. (I want to prepare another basic practice for this subject in the future.)
+Therefore, a storage group and a storage class for log streams are supposed to be created and ACS routines need to be updated so that right classes assign to log streams. Then, SCDS have to be translated, validated and activated. (I am not going to cover in detail these subjects in this practice.)
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/storclas.png)
 
@@ -68,7 +68,7 @@ IXGLOGR is the default HLQ for all of the log streams.
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/storgrp.png)
 
-SCLOGR storage class and SGLOGR storage group was created for the log streams and LOGR01 volume was initialized.
+After SCLOGR storage class and SGLOGR storage group was created for the log streams, SMS-managed volume could be initiliazed with 'STGR' parameter of INIT command of ICKDSF utility or non-SMS volume could be converted to SMS-managed by 'CONVERTV' command of DFDSS. In this practice, LOGR01 volume has been used.
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/add%20volumes.PNG)
 
@@ -78,9 +78,7 @@ SCLOGR storage class and SGLOGR storage group was created for the log streams an
 
 #### 4- Create User Catalog and Alias for Log Stream
 
-IBM recommends that you plan your high level qualifier carefully and add an alias for each high level qualifier in the master catalog that points to a user catalog. So, I created an alias named 'IXGLOGR' and a user catalog in the volume that I am planning to put log streams.
-
-I submit two JCLs below:
+IBM recommends that you plan your high level qualifier carefully and add an alias for each high level qualifier in the master catalog that points to a user catalog. So, an alias named 'IXGLOGR' and a user catalog in the LOGR01 volume should be defined.
 
     //DEFCAT2  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,             
     //   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                                   
