@@ -12,7 +12,7 @@ There are two prerequisites so that in your system you can perform this practice
 
 - Couple data sets have already defined in the system.
 - SMS have to be installed and activated. System logger requires that.
-- A proper initiliazed volume for creating log streams and a user catalog
+- You should be able to initiliaze SMS-managed volume or convert non-SMS volume to SMS-managed.
 
 ### Phases
 
@@ -115,7 +115,7 @@ I submit two JCLs below:
 
 #### 5- Define Log Streams and Policies
 
-I defined two log streams that names is the same with the ones in the SMFPRMLS member except HLQ. HLQ must be 'IFASMF' for log streams. You can see below my JCL for this step.
+I defined two log streams that names is the same with the ones in the SMFPRMLS member except HLQ. For an SMF log stream, the first 7 characters must be 'IFASMF.'. You can see below my JCL for this step.
 
     //DEFLOGR  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,        
     //   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                              
@@ -149,7 +149,7 @@ There are many parameter to define log stream. Here is the description of the pa
 **LG_SIZE:** Size, in 4 KB blocks, of the offload data sets for the log stream <br>
 **STG_SIZE:** Size, in 4 KB blocks, of the staging data sets for the log stream <br>
 
-After log stream defined, you can see out log streams are ready to use. 
+After log stream defined, you can see that log streams are ready to use. 
 
     D LOOGER,L
 
