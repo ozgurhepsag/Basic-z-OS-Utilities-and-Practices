@@ -30,7 +30,7 @@ Other parameters (record types, exits, interval parameters and etc.) nearly same
 
 #### 2- Create Couple Data Sets
 
-I already have couple datasets in my system, so I don't do anything for this step. But, I put here my JCL to create couple datasets. (Don't forget to code couple data sets in COUPLExx member.)
+I already have couple datasets in my system, so I don't do anything for this step. But, I put here my sample JCL to create couple datasets. (Don't forget to code couple data sets in COUPLExx member.)
 
     //DCDSLOGR JOB (SPG1,1),'DEFINE CDS',CLASS=A,MSGLEVEL=(1,1),MSGCLASS=X,  
     // NOTIFY=&SYSUID,REGION=0M                                              
