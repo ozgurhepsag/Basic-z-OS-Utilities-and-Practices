@@ -11,7 +11,8 @@ I have small z/OS system that has no CICS, DB2, IMS, MQ or any ISV products. My 
 There are two prerequisites so that in your system you can perform this practice. These are:
 
 - Couple data sets have already defined in the system.
-- SMS have to be installed and activeted. System logger requires that.
+- SMS have to be installed and activated. System logger requires that.
+- You should be able to initiliaze SMS-managed volume or convert non-SMS volume to SMS-managed.
 
 ### Phases
 
@@ -75,9 +76,46 @@ SCLOGR storage class and SGLOGR storage group was created for the log streams an
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/listvolumes%20in%20stglgr.png)
 
-#### 4- Define Log Streams and Policies
+#### 4- Create User Catalog and Alias for Log Stream
 
-I defined two log streams that names is the same with the ones in the SMFPRMLS member except HLQ. HLQ must be 'IFASMF' for log streams. You can see below my JCL for this step.
+IBM recommends that you plan your high level qualifier carefully and add an alias for each high level qualifier in the master catalog that points to a user catalog. So, I created an alias named 'IXGLOGR' and a user catalog in the volume that I am planning to put log streams.
+
+I submit two JCLs below:
+
+    //DEFCAT2  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,             
+    //   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                                   
+    //DFNEWCAT EXEC PGM=IDCAMS                                           
+    //SYSPRINT DD SYSOUT=A                                               
+    //SYSIN DD *                                                         
+    DEFINE USERCATALOG -                                               
+        (NAME(CATALOG.USER.LOGR01) -                                     
+        VOLUME(LOGR01) -                                                 
+        MEGABYTES(15 5) -                                                
+        ICFCATALOG -                                                     
+        STRNO(3) -                                                       
+        REPLICATE ) -                                                    
+        DATA( CONTROLINTERVALSIZE(4096) -                                
+        BUFND(4) ) -                                                     
+        INDEX( CONTROLINTERVALSIZE (4096) -                              
+        BUFNI(4) )                                                       
+    /*                                                                   
+    
+    
+    //DEFALIAS JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,       
+    //   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                             
+    //STEP1     EXEC  PGM=IDCAMS                                   
+    //SYSPRINT  DD    SYSOUT=A                                     
+    //SYSIN     DD    *                                            
+        DEFINE ALIAS -                                            
+                (NAME(IXGLOGR) -                                    
+                RELATE(CATALOG.USER.LOGR01)) -                     
+                CATALOG(CATALOG.MASTER.M23CAT)                     
+    /*                                                             
+    
+
+#### 5- Define Log Streams and Policies
+
+I defined two log streams that names is the same with the ones in the SMFPRMLS member except HLQ. For an SMF log stream, the first 7 characters must be 'IFASMF.'. You can see below my JCL for this step.
 
     //DEFLOGR  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,        
     //   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                              
@@ -111,11 +149,15 @@ There are many parameter to define log stream. Here is the description of the pa
 **LG_SIZE:** Size, in 4 KB blocks, of the offload data sets for the log stream <br>
 **STG_SIZE:** Size, in 4 KB blocks, of the staging data sets for the log stream <br>
 
-After log stream defined, you can see out log streams are ready to use. Here is the output of the 'D LOOGER,L' command:
+After log stream defined, you can see that log streams are ready to use. 
+
+    D LOOGER,L
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20logger%2Cl.PNG)
 
-#### 5- Switch SMF PARMLIB Member
+You can observe that staging data sets have been created in LOGR01 volume, even if log streams are not being in use.
+
+#### 6- Switch SMF PARMLIB Member
 
 Now, we can use the our new PARMLIB member (SMFPRMLS) after enter 'SET SMF=LS' command from SDSF or console.
 
@@ -135,10 +177,16 @@ Here is some output of the console commands related to log streams after switch:
     
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20logger%2Cconnection.PNG)
 
+Final view of the LOGR01 volume.
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/LOGR01%20volume.PNG)
+
+#### 7- Update IEASYSxx
+
 In IEASYSxx (IEASYS00 in my system) member's SMF parameter should be updated like 'SMF=LS', if we want to use log streams after IPLs.
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/IEASYS.png)
 
-Do not delete your old MAN data sets and SMF PARMLIB member that used to recording SMF records to data sets. Because, you can switch recording types via 'SET SMF=LS' or 'SET SMF=DS' operator commands.
+Do not delete your old MAN data sets and SMF PARMLIB member that used to recording SMF records to data sets. Because, you can switch recording types via 'SET SMF=LS' (SMFPRMLS for log stream recording) or 'SET SMF=DS' (SMFPRMDS for data set recording) operator commands.
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/PARMLIB.png)
