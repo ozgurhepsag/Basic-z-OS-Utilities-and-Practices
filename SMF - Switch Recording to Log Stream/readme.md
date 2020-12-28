@@ -187,6 +187,6 @@ In IEASYSxx (IEASYS00 in my system) member's SMF parameter should be updated lik
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/IEASYS.png)
 
-Do not delete your old MAN data sets and SMF PARMLIB member that used to recording SMF records to data sets. Because, you can switch recording types via 'SET SMF=LS' or 'SET SMF=DS' operator commands.
+Do not delete your old MAN data sets and SMF PARMLIB member that used to recording SMF records to data sets. Because, you can switch recording types via 'SET SMF=LS' (SMFPRMLS for log stream recording) or 'SET SMF=DS' (SMFPRMDS for data set recording) operator commands.
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/PARMLIB.png)
