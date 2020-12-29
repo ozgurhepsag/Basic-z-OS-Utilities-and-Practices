@@ -8,6 +8,8 @@ D IOS,CONFIG
 D PARMLIB
 D SYMBOLS	
 
+D U,VOL=[volname]
+D U,,ALLOC,[unit_address],1
 D U,,,3200
 D U,,,3200,3
 V 3200,[ONLINE || OFFLINE]
@@ -23,11 +25,13 @@ D SMS,VOL(volser)
 DISPLAY SMF
 DISPLAY SMF,O
 DISPLAY SMF,M    =>  Display the record types that are being collected.
+SET SMF=xx
 
 D LOGREC
+SETLOGRC LOGSTREAM
+SETLOGRC DATASET
 
 DISPLAY LOGGER
-SETLOGRC LOGSTREAM
 D LOGGER,LOGSTREAM    =>  Display logstream sysplex information
 D LOGGER,LOGSTREAM,LSNAME=[lsname]
 D LOGGER,STR   =>  Display logstreams defined to any structure  
@@ -53,9 +57,11 @@ DISPLAY M=CHP
 
 DEVSERV QDASD,TYPE=ALL  => ALL OF THE DISK STORAGE
 DS P,xxxx,1 (DEVSERV PATHS)
+DS S,xxxx
 
 D PROG,LNKLST
 D PROG,APF
+SET PROG=xx
 
 D LLA  (Library Lookaside) 
 MODIFY LLA,REFRESH
