@@ -1,0 +1,25 @@
+//ADDUSER  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,             
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                                   
+//NEWID    EXEC PGM=IKJEFT01                                         
+//SYSPRINT DD SYSOUT=*                                               
+//SYSTSPRT DD SYSOUT=*                                               
+//SYSTERM  DD DUMMY                                                  
+//SYSUADS  DD DSN=SYS1.UADS,DISP=SHR                                 
+//SYSLBC   DD DSN=SYS1.BRODCAST,DISP=SHR                             
+//SYSTSIN  DD *                                                      
+  DD 'OZGUR.*'                                                       
+  DU OZGUR                                                           
+  AU OZGUR NAME('OZGUR HEPSAG') PASSWORD(OZGUR)           -          
+   OWNER(IBMUSER) DFLTGRP(SYS1) UACC(READ) OPERATIONS SPECIAL   -    
+   TSO(ACCTNUM(ACCT#) PROC(IKJACCNT) JOBCLASS(A) MSGCLASS(X) -       
+      HOLDCLASS(X) SYSOUTCLASS(X) SIZE(4048) MAXSIZE(204800)) -      
+    OMVS(HOME(/u/ozgur) PROGRAM(/bin/sh) UID(67))                    
+  PERMIT ACCT#     CLASS(ACCTNUM) ID(OZGUR)                          
+  PERMIT IKJACCNT  CLASS(TSOPROC) ID(OZGUR)                          
+  PERMIT JCL       CLASS(TSOAUTH) ID(OZGUR)                          
+  PERMIT OPER      CLASS(TSOAUTH) ID(OZGUR)         
+  PERMIT ACCT      CLASS(TSOAUTH) ID(OZGUR)         
+  PERMIT MOUNT     CLASS(TSOAUTH) ID(OZGUR)         
+  AD 'OZGUR.*'    OWNER(OZGUR) UACC(READ) GENERIC   
+  SETROPTS REFRESH RACLIST(TSOPROC)                 
+  MKDIR '/u/OZGUR'                                  
