@@ -4,6 +4,7 @@ D A,L
 
 D IPLINFO
 D IOS,CONFIG
+D IOS,HYPERPAV
 
 D PARMLIB
 D SYMBOLS	
@@ -35,7 +36,8 @@ DISPLAY LOGGER
 D LOGGER,LOGSTREAM    =>  Display logstream sysplex information
 D LOGGER,LOGSTREAM,LSNAME=[lsname]
 D LOGGER,STR   =>  Display logstreams defined to any structure  
-D LOGGER,CONNECTION  =>  Display all logstreams with connections to the system		  	
+D LOGGER,CONNECTION  =>  Display all logstreams with connections to the system
+D LOGGER,IXGCNF		 =>  Display IXGCNFxx member's parameters 	
 
 DISPLAY XCF,C
 DISPLAY XCF,C,TYPE=LOGR
