@@ -100,8 +100,15 @@ D ASM
 
 D GRS
 D GRS,C       => Display GRS contention information
+D GRS,CONTENTION,LATCH
 D GRS,ANALYZE,BLOCKER    => Provides a list of the requesters that have been blocking ENQ resources
 D GRS,ANALYZE,WAITER     => Provides a list of requesters that have been waiting
+D GRS,ANALYZE,DEPENDENCY
+D GRS,RNL=INCL           => Shows the contents of the SYSTEM inclusion RNL
+D GRS,RNL=EXCL           => Shows the contents of the SYSTEMS exclusion RNL
+D GRS,RNL=CON            => Shows the contents of reserve conversion RNL
+D GRS,RES=(SYSDSN,SYS1.LINKLIB)
+D GRS,DEV=[device address]      => Shows whether a specified device is RESERVEd by the system
  
 $D ACTIVATE
 $D SPL
