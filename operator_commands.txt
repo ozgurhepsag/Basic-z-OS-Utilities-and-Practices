@@ -1,6 +1,7 @@
 These operator commands are the commands that I use frequently. I will add more when I remember or learn from my experiences.
 
 D A,L
+D R,R
 
 D IPLINFO
 D IOS,CONFIG
@@ -97,6 +98,8 @@ D ETR         => Display the status of STP or the Sysplex Timer
 D CF
 
 D ASM
+
+D OMVS,F
 
 D GRS
 D GRS,C       => Display GRS contention information
