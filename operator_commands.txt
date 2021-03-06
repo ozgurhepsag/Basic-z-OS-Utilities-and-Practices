@@ -99,7 +99,11 @@ D CF
 
 D ASM
 
-D OMVS,F
+D OMVS
+D OMVS,F          => Display mounted file systems and associated mount points
+D OMVS,L
+D OMVS,A=ALL      => Display all active OMVS processes
+D OMVS,PID=nnnn   => Display the status of an individual process and threads running under that process
 
 D GRS
 D GRS,C       => Display GRS contention information
@@ -120,6 +124,8 @@ $D CKPTDEF
 $T CKPTDEF,NEWCKPT1=(STRNAME=[JES2strname])
 $T CKPTDEF,RECONFIG=YES	 =>  Initiate JES2 checkpoint reconfiguration dialog.
 $T SPOOLDEF,…
+$CJ(xxx)
+$CJ(xxx),P
 
 RO *ALL,[command]    => Route commands to all systems in the sysplex
 RO *OTHER,[]
