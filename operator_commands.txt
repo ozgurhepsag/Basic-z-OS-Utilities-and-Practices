@@ -66,6 +66,7 @@ DS P,xxxx,1 (DEVSERV PATHS)
 DS S,xxxx
 
 D PROG,LNKLST
+D PROG,LNKLST,NAMES 
 D PROG,APF
 SET PROG=xx
 
@@ -105,6 +106,9 @@ D OMVS,L
 D OMVS,A=ALL      => Display all active OMVS processes
 D OMVS,PID=nnnn   => Display the status of an individual process and threads running under that process
 
+F ZFS,FSINFO,ALL
+F ZFS,QUERY,STATUS
+
 D GRS
 D GRS,C       => Display GRS contention information
 D GRS,CONTENTION,LATCH
@@ -126,6 +130,11 @@ $T CKPTDEF,RECONFIG=YES	 =>  Initiate JES2 checkpoint reconfiguration dialog.
 $T SPOOLDEF,…
 $CJ(xxx)
 $CJ(xxx),P
+
+D PROD,STATE
+D PROD,REGISTERED
+SET PROD=xx
+T PROD=xx
 
 RO *ALL,[command]    => Route commands to all systems in the sysplex
 RO *OTHER,[]
