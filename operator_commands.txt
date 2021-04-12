@@ -16,7 +16,7 @@ D U,,ALLOC,[unit_address],1
 D U,,,3200
 D U,,,3200,3
 V 3200,[ONLINE || OFFLINE]
-V 0700,CONSOLE => 0700 adresli device'i konsol yap
+V 0700,CONSOLE  => make console the device that have 0700 address.
 
 D M
 D M=CPU
@@ -46,12 +46,15 @@ DISPLAY XCF,C,TYPE=LOGR
 D XCF,COUPLE,TYPE=SYSPLEX 
 D XCF,STR
 D XCF,STR,STRNAME=[strname]
+D XCF,CF
+D XCF,CF,CFNAME=[cfname]
 D XCF,SYSPLEX
 D XCF,GRP
 D XCF,GRP,[groupname]
 
 D C            =>   Display consoles
 V OPERLOG,HARDCPY
+V OPERLOG,HARDCPY,OFF
 D C,HC,L=Z 
 D C,HC
 
@@ -108,6 +111,10 @@ D OMVS,PID=nnnn   => Display the status of an individual process and threads run
 
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
+F ZFS,QUERY,LEVEL
+
+MODIFY BPXOINIT,FILESYS=DISPLAY
+MODIFY BPXOINIT,FILESYS=DISPLAY,ALL
 
 D GRS
 D GRS,C       => Display GRS contention information
@@ -123,11 +130,22 @@ D GRS,DEV=[device address]      => Shows whether a specified device is RESERVEd 
  
 $D ACTIVATE
 $D SPL
+$D SPL,LONG
 $D SPOOLDEF 
 $D CKPTDEF 
 $T CKPTDEF,NEWCKPT1=(STRNAME=[JES2strname])
 $T CKPTDEF,RECONFIG=YES	 =>  Initiate JES2 checkpoint reconfiguration dialog.
 $T SPOOLDEF,…
+$S SPL(######)
+$S SPL(######),FORMAT,RESERVED=YES,SPACE=(MAX)
+$T SPOOL(######),RESERVED=NO
+$DJQ,SPL=(V=######),STATUS
+$D SPOOL,MIGDATA      => Display all volumes having contiguous free space
+$D INITINFO
+$D MEMBER
+$D OUTCLASS
+$JDSTATUS            
+$JDMONITOR
 $CJ(xxx)
 $CJ(xxx),P
 
@@ -135,6 +153,8 @@ D PROD,STATE
 D PROD,REGISTERED
 SET PROD=xx
 T PROD=xx
+
+D NET,E,ID=[id]
 
 RO *ALL,[command]    => Route commands to all systems in the sysplex
 RO *OTHER,[]
