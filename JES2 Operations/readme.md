@@ -32,7 +32,7 @@ I added model-27 volume with VOL=SER=SPL002, then SPL002 volume was made online.
 
 In SPOOLDEF, it is given that TGSPACE could be maximum 114016 and 50075 of TGSPACE is being active now. Since I wanted to use all of my new spool volume (model 27 ≈ 200000 TGS), I needed to change my maximum TGSPACE value sufficiently. Don't forget to update JES2 PARMLIB member!
 
-    $T SPOOLDEF,TGSPACE
+    $T SPOOLDEF,TGSPACE=(MAX=260000)
     
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/JES2%20Operations/ss/%24T%20SPOOLDEF%2CTGSPACE.PNG)
 
