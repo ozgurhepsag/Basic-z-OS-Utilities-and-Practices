@@ -121,8 +121,6 @@ I added 2 model-9 volumes with CKP003 and CKP004 volume serials, then those volu
 
 #### Specify the NEWCKPTn data sets
 
-It is recommended to exclude Checkpoint data sets from GRS mechanism so access to them is not blocked by it.
-
 Before using reconfiguration dialog to change Checkpoint data sets, I allocated them using JCL below. Old data sets were 300 cylinders and new ones are 4000 cylinders.
 
         //NEWCKPT  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,         
@@ -143,6 +141,8 @@ These data sets are only defined to JES2 at some time after initialization; they
         $T CKPTDEF,NEWCKPT2=(DSN=SYS1.VBT1.HASPCKP4,VOL=CKP004)
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/JES2%20Operations/ss/%24D%20CKPTDEF%20after.PNG)
+
+It is also recommended to exclude Checkpoint data sets from GRS mechanism so access to them is not blocked by it.
 
 #### Start JES2 reconfiguration dialog
 
