@@ -114,6 +114,7 @@ MODIFY OMVS,RESTART   => restarts and reinitializes the z/OS UNIX environment
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
 F ZFS,QUERY,LEVEL
+F ZFS,STOPPFS=ZFS
 
 MODIFY BPXOINIT,FILESYS=DISPLAY          => Display system information in CDS
 MODIFY BPXOINIT,FILESYS=DISPLAY,ALL      => Display file system information in CDS
