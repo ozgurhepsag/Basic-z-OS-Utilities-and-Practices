@@ -168,8 +168,6 @@ CKPT1 and CKPT2 capacity increased from 53988 to 719988.
 
 You can see from the console some messages about NEWCKPT data sets, because NEWCKPT1 and NEWCKPT2 data sets become unavailable after forwarding.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/JES2%20Operations/ss/jes2%20parmblib%20member.PNG)
-
         *17.33.26          *$HASP256 FUTURE AUTOMATIC FORWARDING OF CKPT1 IS       
         * SUSPENDED UNTIL                                                          
         *         NEWCKPT1 IS RESPECIFIED.                                         
@@ -181,3 +179,6 @@ You can see from the console some messages about NEWCKPT data sets, because NEWC
         *         ISSUE $T CKPTDEF,NEWCKPT2=(...) TO RESPECIFY                 	   
 
 The last and the most important thing is JES2 PARMLIB member modification. If you forget it there may be serious problems during JES2 restart.
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/JES2%20Operations/ss/jes2%20parmblib%20member.PNG)
+
