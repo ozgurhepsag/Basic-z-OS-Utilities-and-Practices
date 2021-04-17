@@ -139,6 +139,7 @@ $D CKPTSPACE
 $T CKPTDEF,NEWCKPT1=(STRNAME=[JES2strname])
 $T CKPTDEF,RECONFIG=YES	 =>  Initiate JES2 checkpoint reconfiguration dialog.
 $T SPOOLDEF,…
+$T SPOOLDEF,TGSPACE=(MAX=nnnnnn)
 $S SPL(volser)
 $S SPL(volser),FORMAT,RESERVED=YES,SPACE=(MAX)
 $T SPOOL(volser),RESERVED=NO
