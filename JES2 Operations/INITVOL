@@ -1,0 +1,6 @@
+//INITVOL  JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,               
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                                     
+//INITD    EXEC PGM=ICKDSF,PARM='NOREPLYLU,FORCE'                      
+//SYSPRINT DD   SYSOUT=*                                               
+//SYSIN    DD   *                                                      
+ INIT UNIT(1021) VTOC(0,1,140) NVFY PRG VOLID(SPL002)                       

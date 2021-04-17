@@ -108,13 +108,15 @@ D OMVS,F          => Display mounted file systems and associated mount points
 D OMVS,L
 D OMVS,A=ALL      => Display all active OMVS processes
 D OMVS,PID=nnnn   => Display the status of an individual process and threads running under that process
+MODIFY OMVS,SHUTDOWN  => stops z/OS UNIX processes
+MODIFY OMVS,RESTART   => restarts and reinitializes the z/OS UNIX environment
 
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
 F ZFS,QUERY,LEVEL
 
-MODIFY BPXOINIT,FILESYS=DISPLAY
-MODIFY BPXOINIT,FILESYS=DISPLAY,ALL
+MODIFY BPXOINIT,FILESYS=DISPLAY          => Display system information in CDS
+MODIFY BPXOINIT,FILESYS=DISPLAY,ALL      => Display file system information in CDS
 
 D GRS
 D GRS,C       => Display GRS contention information
@@ -133,13 +135,15 @@ $D SPL
 $D SPL,LONG
 $D SPOOLDEF 
 $D CKPTDEF 
+$D CKPTSPACE
 $T CKPTDEF,NEWCKPT1=(STRNAME=[JES2strname])
 $T CKPTDEF,RECONFIG=YES	 =>  Initiate JES2 checkpoint reconfiguration dialog.
 $T SPOOLDEF,…
-$S SPL(######)
-$S SPL(######),FORMAT,RESERVED=YES,SPACE=(MAX)
-$T SPOOL(######),RESERVED=NO
-$DJQ,SPL=(V=######),STATUS
+$S SPL(volser)
+$S SPL(volser),FORMAT,RESERVED=YES,SPACE=(MAX)
+$T SPOOL(volser),RESERVED=NO
+$M SPOOL(volser),TARGET=target
+$DJQ,SPL=(V=volser),STATUS
 $D SPOOL,MIGDATA      => Display all volumes having contiguous free space
 $D INITINFO
 $D MEMBER
