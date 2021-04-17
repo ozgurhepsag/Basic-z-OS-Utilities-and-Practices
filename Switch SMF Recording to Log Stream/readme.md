@@ -20,11 +20,11 @@ There are two prerequisites so that in your system you can perform this practice
 
 Previously, I have been using MAN data sets in my system to record SMF records.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/man%20datasets.PNG)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/man%20datasets.PNG)
 
 Firstly, new member must be created in the PARMLIB. I named this new member 'SMFPRMLS' (SMFPRMxx). Key thing in this member is to code 'RECORDING(LOGSTREAM)'. Then, I put 2 log streams. One of these is default log stream that records all of the SMF records and other is to keep records that records just SMF records for SCRT report.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/SMFPRMLS.png)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/SMFPRMLS.png)
 
 Other parameters (record types, exits, interval parameters and etc.) nearly same with my old SMFPRM member. You can obtain two of these members in this repository. You can go to [IBM Knowledge Center](https://www.ibm.com/support/knowledgecenter/SSLTBW_2.1.0/com.ibm.zos.v2r1.ieae200/smfparm.htm) to get further information for the SMFPRMxx parameters.
 
@@ -62,19 +62,19 @@ SMS manages the DASD log data sets and staging data sets, because system logger 
 
 Therefore, a storage group and a storage class for log streams are supposed to be created and ACS routines need to be updated so that right classes assign to log streams. Then, SCDS have to be translated, validated and activated. (I am not going to cover in detail these subjects in this practice.)
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/storclas.png)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/storclas.png)
 
 IXGLOGR is the default HLQ for all of the log streams.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/storgrp.png)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/storgrp.png)
 
 After SCLOGR storage class and SGLOGR storage group was created for the log streams, SMS-managed volume could be initiliazed with 'STGR' parameter of INIT command of ICKDSF utility or non-SMS volume could be converted to SMS-managed by 'CONVERTV' command of DFDSS. In this practice, LOGR01 volume has been used.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/add%20volumes.PNG)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/add%20volumes.PNG)
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/storage%20groups.png)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/storage%20groups.png)
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/listvolumes%20in%20stglgr.png)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/listvolumes%20in%20stglgr.png)
 
 #### 4- Create User Catalog and Alias for Log Stream
 
@@ -151,7 +151,7 @@ After log stream defined, you can see that log streams are ready to use.
 
     D LOOGER,L
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20logger%2Cl.PNG)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20logger%2Cl.PNG)
 
 You can observe that staging data sets have been created in LOGR01 volume, even if log streams are not being in use.
 
@@ -159,32 +159,32 @@ You can observe that staging data sets have been created in LOGR01 volume, even 
 
 Now, we can use the our new PARMLIB member (SMFPRMLS) after enter 'SET SMF=LS' command from SDSF or console.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/set%20smf.PNG)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/set%20smf.PNG)
 
 Here is some output of the console commands related to log streams after switch:
 
     D SMF
     
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20smf.PNG)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20smf.PNG)
 
     D LOGGER
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20logger%2Cl%20v2.PNG)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20logger%2Cl%20v2.PNG)
 
     D LOGGER,CONNECTION
     
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20logger%2Cconnection.PNG)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/d%20logger%2Cconnection.PNG)
 
 Final view of the LOGR01 volume.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/LOGR01%20volume.PNG)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/LOGR01%20volume.PNG)
 
 #### 7- Update IEASYSxx
 
 In IEASYSxx (IEASYS00 in my system) member's SMF parameter should be updated like 'SMF=LS', if we want to use log streams after IPLs.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/IEASYS.png)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/IEASYS.png)
 
 Do not delete your old MAN data sets and SMF PARMLIB member that used to recording SMF records to data sets. Because, you can switch recording types via 'SET SMF=LS' (SMFPRMLS for log stream recording) or 'SET SMF=DS' (SMFPRMDS for data set recording) operator commands.
 
-![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/PARMLIB.png)
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/SMF%20-%20Switch%20Recording%20to%20Log%20Stream/Images/PARMLIB.png)
