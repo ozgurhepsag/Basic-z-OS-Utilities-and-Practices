@@ -1,0 +1,6 @@
+//DUMMYJOB JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,  
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                        
+//STEP01 EXEC PGM=IEFBR14                
+//TEMPDSN DD DUMMY                       
+//SYSIN DD *                             
+/*
