@@ -15,7 +15,6 @@ D U,VOL=[volname]
 D U,,ALLOC,[unit_address],1
 D U,,,3200
 D U,,,3200,3
-D U,,ONLINE     => Display all online devices
 V 3200,[ONLINE || OFFLINE]
 V 0700,CONSOLE  => make console the device that have 0700 address.
 
@@ -111,7 +110,6 @@ D OMVS,A=ALL      => Display all active OMVS processes
 D OMVS,PID=nnnn   => Display the status of an individual process and threads running under that process
 MODIFY OMVS,SHUTDOWN  => stops z/OS UNIX processes
 MODIFY OMVS,RESTART   => restarts and reinitializes the z/OS UNIX environment
-F OMVS,STOPPFS=ZFS  
 
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
@@ -167,5 +165,3 @@ D NET,E,ID=[id]
 RO *ALL,[command]    => Route commands to all systems in the sysplex
 RO *OTHER,[]
 RO sysname,[command]
-
-C U=[userid]
