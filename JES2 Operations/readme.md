@@ -11,7 +11,7 @@ Before this practise, I just have one model-9 volume for JES2 spool data set. Vo
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/JES2%20Operations/ss/dspl%2Clong.PNG)
 
-You can see below my spool definition. Track Group is simply an allocation unit for spool (You can see the definitions of the SPOOLDEF parameters from [IBM Knowledge Center](https://www.ibm.com/docs/en/zos/2.4.0?topic=definition-parameter-description-spooldef)). The more TG space, the more space for the spool.
+You can see below my spool definition. Track Group Space (TGSPACE) is important here. Track Group is simply an allocation unit for spool (You can see the definitions of the SPOOLDEF parameters from [IBM Knowledge Center](https://www.ibm.com/docs/en/zos/2.4.0?topic=definition-parameter-description-spooldef)). You define DASD data sets in tracks or cylinders. Spool is allocated in Track Groups, by default one Group has three tracks. The more TG space, the more space for the spool.
 
     $D SPOOLDEF
 
