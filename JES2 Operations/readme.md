@@ -40,7 +40,7 @@ Maximum TGSPACE value should be specified as a multiple of 16288, otherwise JES2
 
 #### Start New Spool Volume
 
-When you start new volume with command below, spool data set will be allocated (with maximum space) automatically and reserved.
+When you start new volume with command below, spool data set will be allocated (with maximum space to use whole volume) automatically and reserved.
 
     $S SPL(SPL002),FORMAT,RESERVED=YES,SPACE=(MAX)
 
