@@ -73,6 +73,8 @@ D PROG,LNKLST
 D PROG,LNKLST,NAMES 
 D PROG,APF
 SET PROG=xx
+SETPROG LNKLST,UPDATE,JOB=*
+SETPROG LNKLST,UNDEFINE,LNKLSTxx
 
 D LLA  (Library Lookaside) 
 MODIFY LLA,REFRESH
@@ -167,5 +169,7 @@ D NET,E,ID=[id]
 RO *ALL,[command]    => Route commands to all systems in the sysplex
 RO *OTHER,[]
 RO sysname,[command]
+
+SET IKJTSO=xx
 
 C U=[userid]
