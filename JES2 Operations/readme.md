@@ -184,3 +184,9 @@ The last and the most important thing is JES2 PARMLIB member modification. If yo
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/JES2%20Operations/ss/jes2%20parmblib%20member.PNG)
 
+## References
+
+z/OS JES2 Initialization and Tuning Guide </br>
+z/OS JES2 Commands </br>
+http://www.mainframetips.com/add-or-remove-jes2-spool-volumes/ </br>
+https://mainframeplayground.neocities.org/JES2_SDSF.html 
