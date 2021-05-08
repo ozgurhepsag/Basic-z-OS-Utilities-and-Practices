@@ -21,6 +21,8 @@ V 0700,CONSOLE  => make console the device that have 0700 address.
 
 D M
 D M=CPU
+D M=STOR
+D M=ASM
 
 D SMS
 D SMS,SG(ALL)
@@ -111,6 +113,7 @@ D OMVS,F          => Display mounted file systems and associated mount points
 D OMVS,L
 D OMVS,A=ALL      => Display all active OMVS processes
 D OMVS,PID=nnnn   => Display the status of an individual process and threads running under that process
+D OMVS,OPTIONS
 MODIFY OMVS,SHUTDOWN  => stops z/OS UNIX processes
 MODIFY OMVS,RESTART   => restarts and reinitializes the z/OS UNIX environment
 F OMVS,STOPPFS=ZFS
@@ -171,5 +174,8 @@ RO *OTHER,[]
 RO sysname,[command]
 
 SET IKJTSO=xx
+
+F TSO,USERMAX=1
+F TCAS,USERMAX=#
 
 C U=[userid]
