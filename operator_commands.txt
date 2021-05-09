@@ -17,7 +17,7 @@ D U,,,3200
 D U,,,3200,3
 D U,,ONLINE     => Display all online devices
 V 3200,[ONLINE || OFFLINE]
-V 0700,CONSOLE  => make console the device that have 0700 address.
+V 0700,CONSOLE  => Make console the device that have 0700 address.
 
 D M
 D M=CPU
@@ -84,24 +84,29 @@ MODIFY LLA,UPDATE=xx
 
 D DIAG
 
-F CATALOG,OPEN  => LIST ALL CATALOGS
-MODIFY CATALOG,ALLOCATED   => ALLOCATED CATALOGS (F CATALOG,ALLOCATED)
-F CATALOG,REPORT
-F CATALOG,REPORT,PERFORMANCE
-F CATALOG,REPORT,PERFORMANCE(RESET)
-F CATALOG,REPORT,CATSTATX([catname or mask])
-F CATALOG,REPORT,CATSTATS([catname or mask or blank])
-F CATALOG,REPORT,CACHE
-F CATALOG,LIST
-F CATALOG,ENTRY
-F CATALOG,NOISC(CAT)  => disable an ICF catalog from default caching
-F CATALOG,ECSHR(STATUS) 
-F CATALOG,CONTENTION
+F CATALOG,OPEN  => List all catalogs
+MODIFY CATALOG,ALLOCATED   => Allocated catalogs (same output with F CATALOG,OPEN)
+F CATALOG,REPORT           => Provides basic information about some of the current limits and installation-specified defaults that are selected for the catalog address space,
+F CATALOG,REPORT,PERFORMANCE   => Shows performance statistics, such as response time, for all the types of catalog events
+F CATALOG,REPORT,PERFORMANCE(RESET)  => Reset all performance statistics being accumulated
+F CATALOG,REPORT,CATSTATS([catname or mask or blank])   => Lists the I/O statistics and BUFNI, BUFND, and STRNO for specified catalogs that are active in the catalog address space.
+F CATALOG,REPORT,CATSTATX([catname or mask])   => lists the same I/O statistics and settings that are produced by CATSTATS. It also provides CA-Reclaim and CA-Reuse statistics. Output is in the form of a table for each selected catalog.
+F CATALOG,REPORT,CACHE    => Displays the catalog cache information (including cache hit percentage)
+F CATALOG,LIST      => List catalog task(s)
+F CATALOG,ENTRY 
+F CATALOG,NOISC(CAT)  => Disable an ICF catalog from default caching
+F CATALOG,ECSHR(STATUS)  => Causes the status of each catalog that has been referenced since the last IPL to be displayed
+F CATALOG,ECSHR(AUTOADD) => Indicates whether ECS-eligible catalogs should be automatically added to the ECS structure.
+F CATALOG,CONTENTION  => Displays the Catalog resources for which contention detection is available (ALLOCLCK, SYSIGGV2, SYSZTIOT, and SYSZVVDS)
 F CATALOG,RECOVER,LOCK([UCAT])
 F CATALOG,RECOVER,UNLOCK([UCAT])
 F CATALOG,RECOVER,SUSPEND([UCAT])
 F CATALOG,RECOVER,RESUME([UCAT])
 F CATALOG,VLF || F CATALOG,ISC   => Are VLF or ISC active?
+F CATALOG,CATMAX(nnnn)     => Specifies the maximum number of catalogs that can be opened concurrently in CAS
+F CATALOG,TASKMAX(nnn)     => Specifies the maximum number of CAS service tasks that are attached to process (non-CAS) catalog requests 
+F CATALOG,VVDSSPACE(primary,secondary)  => Indicates that the Catalog Address Space should use the values specified as the primary and secondary allocation amount in tracks for an implicitly defined VVDS
+F CATALOG,RESTART   => Specifies that CAS is to be restarted in a new address space
 
 D ETR         => Display the status of STP or the Sysplex Timer
 D CF
@@ -114,10 +119,8 @@ D OMVS,L
 D OMVS,A=ALL      => Display all active OMVS processes
 D OMVS,PID=nnnn   => Display the status of an individual process and threads running under that process
 D OMVS,OPTIONS
-MODIFY OMVS,SHUTDOWN  => stops z/OS UNIX processes
-MODIFY OMVS,RESTART   => restarts and reinitializes the z/OS UNIX environment
-F OMVS,STOPPFS=ZFS
-
+MODIFY OMVS,SHUTDOWN  => Stops z/OS UNIX processes
+MODIFY OMVS,RESTART   => Restarts and reinitializes the z/OS UNIX environment
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
 F ZFS,QUERY,LEVEL
