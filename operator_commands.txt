@@ -42,7 +42,10 @@ D LOGGER,LOGSTREAM    =>  Display logstream sysplex information
 D LOGGER,LOGSTREAM,LSNAME=[lsname]
 D LOGGER,STR   =>  Display logstreams defined to any structure  
 D LOGGER,CONNECTION  =>  Display all logstreams with connections to the system
+D LOGGER,CONNECTION,LSN=log.stream.name,DETAIL
 D LOGGER,IXGCNF		 =>  Display IXGCNFxx member's parameters 	
+SETLOGR FORCE,DISCONNECT,LSN=log.stream.name    => Request Logger to force disconnect log streams
+SETLOGR FORCE,DELETE,LSN=log.stream.name        => Request Logger to force delete log streams
 
 DISPLAY XCF,C
 DISPLAY XCF,C,TYPE=LOGR
@@ -57,6 +60,12 @@ D XCF,GRP,[groupname]
 SETXCF COUPLE,ACOUPLE=SYS1.DEVLPLEX.XCF.CDS01,TYPE=SYSPLEX  
 SETXCF COUPLE,PSWITCH,TYPE=SYSPLEX
 SETXCF COUPLE,ACOUPLE=SYS1.DEVLPLEX.XCF.CDS02,TYPE=SYSPLEX
+SETXCF START,MAINTMODE,CFNAME=cfhame
+SETXCF STOP,MAINTMODE,CFNAME=cfname
+D XCF,REALLOCATE,TEST
+SETXCF START,REALLOCATE 
+D XCF,REALLOCATE,REPORT
+SETXCF START,REBUILD,STRNAME=strname,LOC=OTHER
 
 D C            =>   Display consoles
 V OPERLOG,HARDCPY
@@ -81,7 +90,7 @@ SET PROG=xx
 SETPROG LNKLST,UPDATE,JOB=*
 SETPROG LNKLST,UNDEFINE,LNKLSTxx
 
-D LLA  (Library Lookaside) 
+D LLA       => Display Library Lookaside
 MODIFY LLA,REFRESH
 MODIFY LLA,UPDATE=xx
 
@@ -140,6 +149,7 @@ D GRS,CONTENTION,LATCH
 D GRS,ANALYZE,BLOCKER    => Provides a list of the requesters that have been blocking ENQ resources
 D GRS,ANALYZE,WAITER     => Provides a list of requesters that have been waiting
 D GRS,ANALYZE,DEPENDENCY
+D GRS,ANALYZE,DEPENDENCY,DETAIL
 D GRS,RNL=INCL           => Shows the contents of the SYSTEM inclusion RNL
 D GRS,RNL=EXCL           => Shows the contents of the SYSTEMS exclusion RNL
 D GRS,RNL=CON            => Shows the contents of reserve conversion RNL
