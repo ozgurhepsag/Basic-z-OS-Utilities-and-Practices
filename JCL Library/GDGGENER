@@ -6,7 +6,13 @@
            DEFINE GDG(NAME(IBMUSER.OZGUR.GDG)   -          
            LIMIT(3)                           -            
            NOEMPTY                            -            
-           SCRATCH)                                        
+           SCRATCH)
+//* WHEN THE LIMIT IS EXCEEDED:
+//* EMPTY - ALL THE VERSIONS ARE TO BE UNCATALOGED
+//* NOEMPTY - ONLY THE OLDEST VERSION IS TO BE UNCATALOGED
+//* WHENEVER THE ENTRY OF THE GDG IS REMOVED:
+//* SCRATCH - IT SHOULD BE DELETED PHYSICALLY AND UNCATALOGED
+//*	NOSCRATCH - IT SHOULD BE UNCATALOGED, NOT PHYSICALLY DELETED	   
 /*                                                         
 //GDGSTEP2 EXEC PGM=IEFBR14                                
 //GDGMODLD DD  DSN=IBMUSER.OZGUR.GDG(+1),                  

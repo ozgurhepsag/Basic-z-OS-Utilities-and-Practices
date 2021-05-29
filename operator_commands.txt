@@ -4,7 +4,7 @@ D A,L
 D R,R
 
 D IPLINFO
-D IOS,CONFIG
+D IOS,CONFIG     => Display if HyperPAV is active
 D IOS,HYPERPAV
 D IOS,GROUP      => Display the IOS group names and the systems that belong to each group
 
