@@ -1,0 +1,10 @@
+//DSMON   JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,   
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)    
+//STEP01   EXEC PGM=ICHDSM00                                           
+//SYSPRINT DD SYSOUT=X                                                 
+//SYSUT1   DD DSN=SYS1.PARMLIB,DISP=SHR                                
+//SYSUT2   DD SYSOUT=X                                                 
+//SYSIN    DD *                                                        
+  LINECOUNT 55 
+  FUNCTION *
+/*                           
