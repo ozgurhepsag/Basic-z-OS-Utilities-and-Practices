@@ -4,5 +4,6 @@
 //SYSPRINT  DD SYSOUT=*                                   
 //VOLUME   DD  DISP=SHR,UNIT=3390,VOL=SER=NOS001          
 //SYSIN    DD  *                                          
-     LISTVTOC VOL=3390=NOS001,FORMAT                      
+        LISTVTOC VOL=3390=NOS001
+//*     LISTVTOC VOL=3390=NOS001,FORMAT                      
 /*                                                        
