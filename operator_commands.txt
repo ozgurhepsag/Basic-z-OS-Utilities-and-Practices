@@ -131,17 +131,25 @@ D ASM
 
 D OMVS
 D OMVS,F          => Display mounted file systems and associated mount points
+D OMVS,FILE
+D OMVS,FILE,O
+D OMVS,FILE,N=OMVSSPA.*
+D OMVS,FILE,T=ZFS
 D OMVS,L
 D OMVS,A=ALL      => Display all active OMVS processes
 D OMVS,PID=nnnn   => Display the status of an individual process and threads running under that process
 D OMVS,OPTIONS
+D OMVS,PFS        => Display Physical File System information
+D OMVS,MF         => Display the 10 most recent mount failures
 MODIFY OMVS,SHUTDOWN  => Stops z/OS UNIX processes
 MODIFY OMVS,RESTART   => Restarts and reinitializes the z/OS UNIX environment
 SETOMVS SYNTAXCHECK=(xx)
 
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
-F ZFS,QUERY,LEVEL
+F ZFS,QUERY,SETTINGS    => Display all the current settings of the zFS kernel
+F ZFS,QUERY,LEVEL       => Display the value of the SYSPLEX setting currently in use for zFS
+F ZFS,QUERY,FILE        => Indicates if zFS RW sysplex sharing is being used for the file system.
 F ZFS,STOPPFS=ZFS
 
 MODIFY BPXOINIT,FILESYS=DISPLAY          => Display system information in CDS
