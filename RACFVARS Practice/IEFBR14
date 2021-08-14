@@ -1,0 +1,6 @@
+//CREATE   JOB  (),NOTIFY=&SYSUID,USER=IBMUSER                 
+//STEP1    EXEC PGM=IEFBR14                                    
+//DD2      DD   DSN=OZGUR.SURROGAT.IBMUSER,DISP=(NEW,CATLG),   
+//         SPACE=(TRK,(1,1),RLSE),                             
+//         DCB=(RECFM=FB,LRECL=80)                             
+/*                                                             
