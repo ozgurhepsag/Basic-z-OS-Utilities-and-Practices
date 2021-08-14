@@ -1,6 +1,7 @@
-//CREATE   JOB  (),NOTIFY=&SYSUID,USER=IBMUSER                 
-//STEP1    EXEC PGM=IEFBR14                                    
-//DD2      DD   DSN=OZGUR.SURROGAT.IBMUSER,DISP=(NEW,CATLG),   
-//         SPACE=(TRK,(1,1),RLSE),                             
-//         DCB=(RECFM=FB,LRECL=80)                             
-/*                                                             
+//CREATE   JOB  (),'EMRE',CLASS=A,MSGCLASS=X,REGION=0M,     
+//         NOTIFY=&SYSUID,MSGLEVEL=(1,1),USER=OZGUR         
+//STEP1    EXEC PGM=IEFBR14                                 
+//DD1      DD   DSN=EMRE.SURROGAT.OZGUR,DISP=(NEW,CATLG),   
+//         SPACE=(TRK,(1,1),RLSE),                          
+//         DCB=(RECFM=FB,LRECL=80)                          
+/*                                                                                                          
