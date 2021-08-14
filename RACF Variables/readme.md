@@ -1,4 +1,4 @@
-This is a basic practice example to understand how to use RACF variables. 
+I have a small z/OS system that has no CICS, DB2, IMS, MQ or any ISV products and this is a basic practice to understand how to use RACF variables. The goal in this practice is that some special users that I will specify are able to submit in behalf of IBMUSER sometimes. To do that, we will define a RACF variable that will be used in SURROGAT class profile (SURROGAT class will not be covered in this practice in detail).
 
 ## RACF Variables
 
@@ -22,6 +22,16 @@ You can check your RACF options before or after issue the command above.
 
 RACF variable names must begin with an ampersand (&), can be up to eight characters long, and cannot contain any periods (.) or generic characters. Do not define variable names that start with &RAC; they are reserved for RACF use. </br>
 **Note:** The variable values &RACUID and &RACGPID are not RACF variables and are not members of the RACFVARS class. These variables have specific uses for Global Access Table (GLOBAL class).
+
+A RACF variable defined named '&SUSERS' that contains some special users that I specified to be able to submit in behalf of IBMUSER sometimes.
+
+    RDEFINE RACFVARS &SUSERS ADDMEM(OZGUR EMRE)
+
+Any time a change is made to a RACFVARS profile, the in-storage profiles for the RACFVARS class must be refreshed for the changes to take effect. To refresh the in-storage profiles for the RACFVARS class:
+
+    SETROPTS RACLIST(RACFVARS) REFRESH
+
+
 
 ## References
 
