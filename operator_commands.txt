@@ -9,7 +9,9 @@ D IOS,HYPERPAV
 D IOS,GROUP      => Display the IOS group names and the systems that belong to each group
 
 D PARMLIB
-D SYMBOLS	
+D SYMBOLS
+D OPDATA
+D OPDATA,MONITOR,[FULL]	
 
 D U,VOL=[volname]
 D U,,ALLOC,[unit_address],1
