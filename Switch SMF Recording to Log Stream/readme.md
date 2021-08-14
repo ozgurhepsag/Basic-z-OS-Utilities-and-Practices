@@ -4,7 +4,7 @@ This is the short explanation of my practice.
 
 ### Overview
 
-I have small z/OS system that has no CICS, DB2, IMS, MQ or any ISV products. My target is to switch SMF recording from data set to DASD-only log stream. So, we have to create new PARMLIB member. We should decide name of the log streams, record types that we want to record, SMF parameters, SMF exits and etc for new member. A user catalog and an alias points to that catalog is needed just for the log streams. Also, log streams requires to be SMS-managed. Then, policies can be defined while creating log streams using IXCMIAPU utility. Our log streams are ready to switch, after create log stream staging data sets and define policies.
+I have a small z/OS system that has no CICS, DB2, IMS, MQ or any ISV products. My target is to switch SMF recording from data set to DASD-only log stream. So, we have to create new PARMLIB member. We should decide name of the log streams, record types that we want to record, SMF parameters, SMF exits and etc for new member. A user catalog and an alias points to that catalog is needed just for the log streams. Also, log streams requires to be SMS-managed. Then, policies can be defined while creating log streams using IXCMIAPU utility. Our log streams are ready to switch, after create log stream staging data sets and define policies.
 
 ### Prerequisites
 
