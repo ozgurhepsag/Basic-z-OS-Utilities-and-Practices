@@ -147,10 +147,13 @@ MODIFY OMVS,SHUTDOWN  => Stops z/OS UNIX processes
 MODIFY OMVS,RESTART   => Restarts and reinitializes the z/OS UNIX environment
 SETOMVS SYNTAXCHECK=(xx)
 
+MODIFY BPXOINIT,FILESYS=DISPLAY   => Display the system information that is in the OMVS CDS
+MODIFY BPXOINIT,FILESYS=DISPLAY,ALL
+
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
 F ZFS,QUERY,SETTINGS    => Display all the current settings of the zFS kernel
-F ZFS,QUERY,LEVEL       => Display the value of the SYSPLEX setting currently in use for zFS
+F ZFS,QUERY,LEVEL       => Display the value of the SYSPLEX setting currently in use for zFS (SYSPLEX_FILESYS_SHAREMODE)
 F ZFS,QUERY,FILE        => Indicates if zFS RW sysplex sharing is being used for the file system.
 F ZFS,STOPPFS=ZFS
 
