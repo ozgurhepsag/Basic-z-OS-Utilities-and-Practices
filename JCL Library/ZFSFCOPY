@@ -1,0 +1,37 @@
+//ZFSFCOPY JOB ,'EXPAND AGGR WITH REPRO',                               
+//         CLASS=A,MSGCLASS=X,MSGLEVEL=(1,1)                            
+//DEFINE   EXEC   PGM=IDCAMS                                            
+//SYSPRINT DD     SYSOUT=H                                              
+//SYSIN    DD     *                                                     
+     DEFINE CLUSTER (NAME(VOH1.OZGUR.ZFS2) -                            
+            LINEAR CYL(2 1) SHAREOPTIONS(3) -                           
+            VOLUMES(USR001))                                            
+/*                                                                      
+//LCAT1    EXEC PGM=IDCAMS                                              
+//SYSPRINT DD  SYSOUT=*                                                 
+//* This step should show a HI-U-RBA of 0 for VOH1.OZGUR.ZFS2           
+//SYSIN    DD  *                                                        
+          LISTCAT ENTRIES(VOH1.OZGUR.ZFS) -                             
+                  ALL                                                   
+          LISTCAT ENTRIES(VOH1.OZGUR.ZFS2) -                            
+                  ALL                                                   
+/*                                                                      
+//REPRO1   EXEC PGM=IDCAMS                                              
+//SYSPRINT DD SYSOUT=H                                                  
+//* The next line guarantees that the file system is not mounted        
+//IN1   DD DSN=VOH1.OZGUR.ZFS,DISP=OLD                                  
+//SYSIN DD *                                                            
+  REPRO -                                                               
+     INFILE(IN1) -                                                      
+     OUTDATASET(VOH1.OZGUR.ZFS2)                                        
+/*                                                                      
+//LCAT2    EXEC PGM=IDCAMS                                              
+//SYSPRINT DD  SYSOUT=*                                                 
+//* This step should show the HI-U-RBA of VOH1.OZGUR.ZFS2               
+//* equal to the HI-U-RBA of VOH1.OZGUR.ZFS                             
+//SYSIN    DD  *                                                        
+          LISTCAT ENTRIES(VOH1.OZGUR.ZFS) -                             
+                  ALL                                         
+          LISTCAT ENTRIES(VOH1.OZGUR.ZFS2) -                  
+                  ALL                                         
+/*                                                            
