@@ -1,0 +1,16 @@
+//ZFSBKUP  JOB (OS390),'OZGUR',CLASS=A,NOTIFY=&SYSUID,                 
+//             MSGCLASS=X,MSGLEVEL=(1,1)                               
+//*-----------------------------------------------------------------   
+//* THIS JOB QUIESCES A ZFS AGGREGATE, DUMPS IT, THEN UNQUIESCES IT.   
+//*-----------------------------------------------------------------   
+//DUMP    EXEC PGM=ADRDSSU,REGION=4096K                                
+//SYSPRINT DD  SYSOUT=*                                                
+//SYSABEND DD  SYSOUT=*                                                
+//OUT      DD  DSN=VOH1.OZGUR.ZFS.BACKUP,                              
+//             DISP=(NEW,CATLG,DELETE),SPACE=(CYL,(5,1),RLSE)          
+//SYSIN    DD  *                                                       
+ DUMP DATASET(INCLUDE(VOH1.OZGUR.ZFS)) -                               
+ RESET -                                                               
+ OUTDD(OUT)                                                            
+/*                                                                     
+//                                                                     
