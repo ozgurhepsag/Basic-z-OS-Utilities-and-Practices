@@ -1,0 +1,46 @@
+//VOH1C    JOB (VBT),'OZGUR',MSGCLASS=X,NOTIFY=&SYSUID                  
+//*                                                                     
+//********************************************************************  
+//* ALLOCATE A ZFS AGGREGATE (ACTUALLY A VSAM LINEAR DATASET WITH 8     
+//* KB BLOCKS).                                                         
+//* NOTES: - THERE ARE 6 8 KB PER TRACK -> 90 8 KB PER CYL.             
+//*        - WHEN THE TOTAL SIZE OF A FILE IS GREATER THAN 4 GB         
+//*          (EXTENDED FORMAT) THE DFSMS DATACLASS MUST PROVIDE         
+//*          EXTENDED ADDRESSABILITY. ADD DATACLASS(LSEXT).             
+//********************************************************************  
+//DEFINE   EXEC PGM=IDCAMS                                              
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN    DD *,SYMBOLS=CNVTSYS                                         
+ DELETE &SYSUID..ZFS.UNIX                                               
+ SET MAXCC=0                                                            
+ DEFINE CLUSTER(NAME(&SYSUID..OZGUR.ZFS) -                              
+        LINEAR SHAREOPTIONS(2) VOLUMES(USR001) CYL(1))                  
+// IF RC = 0 THEN                                                       
+//********************************************************************  
+//* FORMAT THE ZFS AS A COMPATIBILITY MODE AGGREGATE. THE ZFS           
+//* AGGREGATE CONTAINS 1 ZFS FILE SYSTEM. THE ZFS FILE SYSTEM HAS THE   
+//* SAME NAME AS THE ZFS AGGREGATE (AND THE VSAM LDS).                  
+//* SPECIFY THE DATASETNAME OF THE CLUSTER NAME DEFINED IN THE          
+//* PREVIOUS STEP IN THE PARM FIELD BELOW.                              
+//********************************************************************  
+//FORMAT  EXEC PGM=IOEAGFMT,                                            
+//             PARM=('-aggregate VOH1.OZGUR.ZFS -compat')               
+//SYSPRINT DD SYSOUT=*                                                  
+//STDOUT   DD SYSOUT=*                                                  
+//STDERR   DD SYSOUT=*                                                  
+//SYSUDUMP DD DUMMY                                                     
+//CEEDUMP  DD DUMMY                                                     
+// ELSE                                                                 
+// ENDIF                                                                
+// IF RC = 0 THEN                                                       
+//MOUNT    EXEC PGM=IKJEFT01                                            
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSTSPRT DD SYSOUT=*                                                
+//SYSTSIN  DD *,SYMBOLS=CNVTSYS                                       
+  mkdir '/u/&SYSUID./myzfs'                                           
+  bpxbatch sh chown &SYSUID  /u/&SYSUID./myzfs                        
+  bpxbatch sh chown 755 /u/&SYSUID./myzfs                             
+  MOUNT FILESYSTEM('&SYSUID..OZGUR.ZFS') -                            
+        MOUNTPOINT('/u/&SYSUID./myzfs') TYPE(ZFS) MODE(RDWR)          
+// ELSE                                                               
+// ENDIF                                                              
