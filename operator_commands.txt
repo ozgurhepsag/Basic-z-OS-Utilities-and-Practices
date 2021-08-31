@@ -146,6 +146,8 @@ D OMVS,MF         => Display the 10 most recent mount failures
 MODIFY OMVS,SHUTDOWN  => Stops z/OS UNIX processes
 MODIFY OMVS,RESTART   => Restarts and reinitializes the z/OS UNIX environment
 SETOMVS SYNTAXCHECK=(xx)
+SETOMVS FILESYS,FILESYSTEM='POSIX.PAYROLL.ZFS',SYSNAME=SY2  => To move ownership of the file system from the current owner 
+SETOMVS FILESYS,mountpoint='/PAYROLL',SYSNAME=SY2 
 
 MODIFY BPXOINIT,FILESYS=DISPLAY   => Display the system information that is in the OMVS CDS
 MODIFY BPXOINIT,FILESYS=DISPLAY,ALL
