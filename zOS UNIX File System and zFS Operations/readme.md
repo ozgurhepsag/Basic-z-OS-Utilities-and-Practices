@@ -33,6 +33,8 @@ Then, VSAM linear data set need to be formatted as a compatibility mode aggregat
 		//SYSUDUMP DD DUMMY                                            
 		//CEEDUMP  DD DUMMY                                            
 
+or 
+
 		//ZFSFORMT JOB (VBT),'OZGUR',MSGCLASS=X,NOTIFY=&SYSUID    
 		//FORMAT  EXEC PGM=IOEFSUTL,REGION=0M,                     
 		// PARM=('format -aggregate OZGUR.FIRST.ZFS')             
@@ -40,7 +42,10 @@ Then, VSAM linear data set need to be formatted as a compatibility mode aggregat
 
 ## Mount zFS File System
 
+## Back-up and Restore zFS
+
+## Copy zFS File System to Larger Data Set
+
 ## References
 
 https://www.ibm.com/docs/en/zos/2.4.0?topic=aggregates-creating-compatibility-mode-aggregate </br>
-https://mainframeplayground.neocities.org/JES2_SDSF.html 
