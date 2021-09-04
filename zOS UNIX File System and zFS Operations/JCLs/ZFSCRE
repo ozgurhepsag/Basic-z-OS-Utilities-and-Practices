@@ -1,0 +1,16 @@
+//ZFSCRE   JOB (VBT),'OZGUR',MSGCLASS=X,NOTIFY=&SYSUID                  
+//*                                                                     
+//********************************************************************  
+//* ALLOCATE A ZFS AGGREGATE (ACTUALLY A VSAM LINEAR DATASET WITH 8     
+//* KB BLOCKS).                                                         
+//* NOTES: - THERE ARE 6 8 KB PER TRACK -> 90 8 KB PER CYL.             
+//*        - WHEN THE TOTAL SIZE OF A FILE IS GREATER THAN 4 GB         
+//*          (EXTENDED FORMAT) THE DFSMS DATACLASS MUST PROVIDE         
+//*          EXTENDED ADDRESSABILITY.                                   
+//********************************************************************  
+//DEFINE   EXEC PGM=IDCAMS                                              
+//SYSPRINT DD SYSOUT=*                                                  
+//SYSIN    DD *,SYMBOLS=CNVTSYS                                         
+ SET MAXCC=0                                                            
+ DEFINE CLUSTER(NAME(&SYSUID..FIRST.ZFS) -                              
+        LINEAR SHAREOPTIONS(3) VOLUMES(USR001) CYL(1))                                                                         

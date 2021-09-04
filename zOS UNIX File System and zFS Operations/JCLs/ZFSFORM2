@@ -1,0 +1,4 @@
+//ZFSFORMT JOB (VBT),'OZGUR',MSGCLASS=X,NOTIFY=&SYSUID        
+//CREATE EXEC PGM=IOEFSUTL,REGION=0M,                         
+// PARM=('format -aggregate OZGUR.SECND.ZFS')                 
+//SYSPRINT DD SYSOUT=H                                        
