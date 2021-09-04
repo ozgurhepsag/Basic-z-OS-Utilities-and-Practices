@@ -42,6 +42,21 @@ or
 
 ## Mount zFS File System
 
+You need to mount file systems to mount points that you prepared before. You can mount a zFS to a mount point with several ways.
+
+1- MOUNT TSO/E command
+
+MOUNT specifies a file system that z/OS UNIX is to logically mount onto the root file system or another file system.
+
+2- mount shell command
+
+The mount shell command in /usr/sbin is used to mount a file system or list all mounts over a file system.
+
+3- OSHELL command from Batch job (IKJEFT01 utility)
+
+Mounting and unmounting z/OS UNIX file systems are privileged operations. A user must have UID(0) or have read access to the SUPERUSER.FILESYS.MOUNT resource in the UNIXPRIV class before file systems can be mounted or unmounted.
+
+
 ## Back-up and Restore zFS
 
 ## Copy zFS File System to Larger Data Set
@@ -49,3 +64,5 @@ or
 ## References
 
 https://www.ibm.com/docs/en/zos/2.4.0?topic=aggregates-creating-compatibility-mode-aggregate </br>
+https://www.ibm.com/docs/en/zos/2.4.0?topic=descriptions-mount-logically-mount-file-system </br>
+https://www.ibm.com/docs/en/zos/2.2.0?topic=commands-mount-logically-mount-file-system </br>
