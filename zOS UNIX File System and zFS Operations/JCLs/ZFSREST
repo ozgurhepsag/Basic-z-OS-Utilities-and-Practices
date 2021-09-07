@@ -1,0 +1,17 @@
+//ZFSREST  JOB (VBT1),'OZGUR',CLASS=A,NOTIFY=&SYSUID,                 
+// MSGCLASS=X,MSGLEVEL=(1,1)                                          
+//*-----------------------------------------------------------------  
+//* THIS JOB RESTORES A ZFS AGGREGATE.                                
+//*-----------------------------------------------------------------  
+//ZFSREST EXEC PGM=ADRDSSU,REGION=0M                                  
+//SYSPRINT DD SYSOUT=*                                                
+//SYSABEND DD SYSOUT=*                                                
+//INDS DD DISP=SHR,DSN=OZGUR.ZFS.BACKUP                               
+//SYSIN DD *                                                          
+ RESTORE DATASET(INCLUDE(**)) -                                       
+ CATALOG -                                                            
+ RENAMEU(OZGUR.FIRST.ZFS,OZGUR.THIRD.ZFS)) -                          
+ WRITECHECK -                                                         
+ INDD(INDS)                                                           
+/*                                                                    
+//                                                                    

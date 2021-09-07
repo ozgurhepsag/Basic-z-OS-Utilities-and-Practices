@@ -1,0 +1,15 @@
+//ZFSBKUP  JOB (VBT1),'OZGUR',CLASS=A,NOTIFY=&SYSUID,               
+//             MSGCLASS=X,MSGLEVEL=(1,1)                            
+//*-----------------------------------------------------------------
+//* THIS JOB QUIESCES A ZFS AGGREGATE, DUMPS IT, THEN UNQUIESCES IT.
+//*-----------------------------------------------------------------
+//DUMP    EXEC PGM=ADRDSSU,REGION=4096K                             
+//SYSPRINT DD  SYSOUT=*                                             
+//SYSABEND DD  SYSOUT=*                                             
+//OUT      DD  DSN=OZGUR.ZFS.BACKUP,                                
+//             DISP=(NEW,CATLG,DELETE),SPACE=(CYL,(5,1),RLSE)       
+//SYSIN    DD  *                                                    
+ DUMP DATASET(INCLUDE(OZGUR.FIRST.ZFS)) -                           
+ RESET -                                                            
+ OUTDD(OUT)                                                         
+/*                                                                  
