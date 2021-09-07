@@ -1,0 +1,9 @@
+//ZFSMOUNT JOB (VBT1),'OZGUR',CLASS=A,NOTIFY=&SYSUID,                  
+//             MSGCLASS=X,MSGLEVEL=(1,1)                               
+//PAX1     EXEC PGM=IKJEFT01,REGION=0M                                 
+//SYSTSPRT DD  SYSOUT=*                                                
+//SYSEXEC  DD  DSN=SYS1.SBPXEXEC,DISP=SHR                              
+//SYSTSIN  DD  *                                                       
+ oshell /usr/sbin/mount -t zfs -f OZGUR.FIRST.ZFS                    + 
+  /u/ozgur/myzfs                                                   ;   
+/*                                                                     
