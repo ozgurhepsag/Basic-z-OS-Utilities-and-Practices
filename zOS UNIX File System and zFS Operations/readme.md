@@ -1,6 +1,3 @@
-
-I have a monoplex that has no CICS, DB2, IMS, MQ or any ISV products. Here you can find some basic z/OS UNIX and zFS operations.
-
 ## Create and Format a zFS Aggregate
 
 First, use IDCAMS (or IEFBR14) to create a VSAM linear data set. A zFS file system is created in a zFS aggregate (which is a VSAM linear data set). 
@@ -116,6 +113,10 @@ Note: Mounting and unmounting z/OS UNIX file systems are privileged operations. 
 		
 		***
 
+ For a permanent mount (applies also at next IPL), add the zFS data set name and USS directory path name to the MOUNT section of your PARMLIB library BPXPRMxx member.
+ 
+ ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/zOS%20UNIX%20File%20System%20and%20zFS%20Operations/ss/BPXPRMxx.png)
+
 ## Back-up and Restore zFS
 
 You can back up a zFS aggregate using a DFSMSdss logical dump. DFSMSdss automatically performs a quiesce of the mounted zFS aggregate before dumping the data set and an unquiesce when the dump ends.
@@ -160,7 +161,11 @@ Use DFSMSdss logical restore to restore a zFS aggregate. The aggregate can be re
 
 ## Copy zFS File System to Larger Data Set
 
-## References
+
+
+## Grow a zFS
+
+
 
 https://www.ibm.com/docs/en/zos/2.4.0?topic=zag-creating-managing-zfs-file-systems-using-compatibility-mode-aggregates </br>
 https://www.ibm.com/docs/en/zos/2.4.0?topic=aggregates-creating-compatibility-mode-aggregate </br>
