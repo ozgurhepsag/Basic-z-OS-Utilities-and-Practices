@@ -256,70 +256,73 @@ Second method is using IDCAMS utility to copy the physical blocks of a zFS aggre
 				  ALL                                                  
 		/*
 
+You can see below the results of the IDCAMS LISTCAT steps from the job that OZGUR.EXPAND2.ZFS has a larger HI-A-RBA than OZGUR.FIRST.ZFS. After copy, the HI-A-RBA values of both are equal but the new aggregate can grow into the available space in the allocated portion of the data set or even extend to additional extents.
+
+**HI-U-RBA:** The high-used relative byte address indicates how many bytes were written by zFS.
+**HI-A-RBA:** The high-allocated relative byte address indicates how many bytes could be written by zFS into the current allocation.
+
 ##### Before REPRO
 
           LISTCAT ENTRIES(OZGUR.FIRST.ZFS) -                    
                   ALL                                           
-CLUSTER ------- OZGUR.FIRST.ZFS                                 
-     IN-CAT --- CATALOG.USER.OZGUR                              
-     ASSOCIATIONS                                      
-       DATA-----OZGUR.FIRST.ZFS.DATA                                     
-     VOLUME                                                                                                              
-       VOLSER------------OZG001     PHYREC-SIZE---------4096     HI-A-RBA----------737280     EXTENT-NUMBER----------1   
-       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     HI-U-RBA----------737280     EXTENT-TYPE--------X'40'   
-       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                             
-       EXTENTS:                                                                                                          
-       LOW-CCHH-----X'00270000'     LOW-RBA----------------0     TRACKS----------------15                                
-       HIGH-CCHH----X'0027000E'     HIGH-RBA----------737279                                                             
+	CLUSTER ------- OZGUR.FIRST.ZFS                                 
+	     IN-CAT --- CATALOG.USER.OZGUR                              
+	     ASSOCIATIONS                                      
+	       DATA-----OZGUR.FIRST.ZFS.DATA                                     
+	     VOLUME                                                                                                              
+	       VOLSER------------OZG001     PHYREC-SIZE---------4096     **HI-A-RBA----------737280**     EXTENT-NUMBER----------1   
+	       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     **HI-U-RBA----------737280**     EXTENT-TYPE--------X'40'   
+	       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                             
+	       EXTENTS:                                                                                                          
+	       LOW-CCHH-----X'00270000'     LOW-RBA----------------0     TRACKS----------------15                                
+	       HIGH-CCHH----X'0027000E'     HIGH-RBA----------737279                                                             
 
-          LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -     
-                  ALL                              
-CLUSTER ------- OZGUR.EXPAND2.ZFS                  
-     IN-CAT --- CATALOG.USER.OZGUR 
-     ASSOCIATIONS	 
-       DATA-----OZGUR.EXPAND2.ZFS.DATA    
-     VOLUME                                                                                                                
-       VOLSER------------OZG001     PHYREC-SIZE---------4096     HI-A-RBA---------3686400     EXTENT-NUMBER----------1     
-       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     HI-U-RBA---------------0     EXTENT-TYPE--------X'40'     
-       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                               
-       EXTENTS:                                                                                                            
-       LOW-CCHH-----X'002F0000'     LOW-RBA----------------0     TRACKS----------------75                                  
-       HIGH-CCHH----X'0033000E'     HIGH-RBA---------3686399                                                               
+		  LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -     
+			  ALL                              
+	CLUSTER ------- OZGUR.EXPAND2.ZFS                  
+	     IN-CAT --- CATALOG.USER.OZGUR 
+	     ASSOCIATIONS	 
+	       DATA-----OZGUR.EXPAND2.ZFS.DATA    
+	     VOLUME                                                                                                                
+	       VOLSER------------OZG001     PHYREC-SIZE---------4096     **HI-A-RBA---------3686400**     EXTENT-NUMBER----------1     
+	       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     **HI-U-RBA---------------0**     EXTENT-TYPE--------X'40'     
+	       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                               
+	       EXTENTS:                                                                                                            
+	       LOW-CCHH-----X'002F0000'     LOW-RBA----------------0     TRACKS----------------75                                  
+	       HIGH-CCHH----X'0033000E'     HIGH-RBA---------3686399                                                               
 
 
 ##### After REPRO
 
-
           LISTCAT ENTRIES(OZGUR.FIRST.ZFS) -                  
                   ALL                                         
-CLUSTER ------- OZGUR.FIRST.ZFS                               
-     IN-CAT --- CATALOG.USER.OZGUR                            
-     ASSOCIATIONS                      
-       DATA-----OZGUR.FIRST.ZFS.DATA   
-     VOLUME                                                                                                                 
-       VOLSER------------OZG001     PHYREC-SIZE---------4096     HI-A-RBA----------737280     EXTENT-NUMBER----------1      
-       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     HI-U-RBA----------737280     EXTENT-TYPE--------X'40'      
-       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                                
-       EXTENTS:                                                                                                             
-       LOW-CCHH-----X'00270000'     LOW-RBA----------------0     TRACKS----------------15                                   
-       HIGH-CCHH----X'0027000E'     HIGH-RBA----------737279                                                                
-	             LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -                 
-                  ALL                                          
-CLUSTER ------- OZGUR.EXPAND2.ZFS                              
-     IN-CAT --- CATALOG.USER.OZGUR                             
-     ASSOCIATIONS                        
-       DATA-----OZGUR.EXPAND2.ZFS.DATA   
-     VOLUME                                                                                                               
-       VOLSER------------OZG001     PHYREC-SIZE---------4096     HI-A-RBA---------3686400     EXTENT-NUMBER----------1    
-       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     HI-U-RBA----------737280     EXTENT-TYPE--------X'00'    
-       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                              
-       EXTENTS:                                                                                                           
-       LOW-CCHH-----X'002F0000'     LOW-RBA----------------0     TRACKS----------------75                                 
-       HIGH-CCHH----X'0033000E'     HIGH-RBA---------3686399                                                              
+	CLUSTER ------- OZGUR.FIRST.ZFS                               
+	     IN-CAT --- CATALOG.USER.OZGUR                            
+	     ASSOCIATIONS                      
+	       DATA-----OZGUR.FIRST.ZFS.DATA   
+	     VOLUME                                                                                                                 
+	       VOLSER------------OZG001     PHYREC-SIZE---------4096     **HI-A-RBA----------737280**     EXTENT-NUMBER----------1      
+	       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     **HI-U-RBA----------737280**     EXTENT-TYPE--------X'40'      
+	       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                                
+	       EXTENTS:                                                                                                             
+	       LOW-CCHH-----X'00270000'     LOW-RBA----------------0     TRACKS----------------15                                   
+	       HIGH-CCHH----X'0027000E'     HIGH-RBA----------737279                                                                
+			     LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -                 
+			  ALL                                          
+	CLUSTER ------- OZGUR.EXPAND2.ZFS                              
+	     IN-CAT --- CATALOG.USER.OZGUR                             
+	     ASSOCIATIONS                        
+	       DATA-----OZGUR.EXPAND2.ZFS.DATA   
+	     VOLUME                                                                                                               
+	       VOLSER------------OZG001     PHYREC-SIZE---------4096     **HI-A-RBA---------3686400**     EXTENT-NUMBER----------1    
+	       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     **HI-U-RBA----------737280**     EXTENT-TYPE--------X'00'    
+	       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                              
+	       EXTENTS:                                                                                                           
+	       LOW-CCHH-----X'002F0000'     LOW-RBA----------------0     TRACKS----------------75                                 
+	       HIGH-CCHH----X'0033000E'     HIGH-RBA---------3686399                                                              
 
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/zOS%20UNIX%20File%20System%20and%20zFS%20Operations/ss/repro-copy-result.png)
-
 
 ## Grow a zFS
 
