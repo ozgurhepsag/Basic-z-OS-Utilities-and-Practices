@@ -218,8 +218,107 @@ Firstly, we need to allocate a new larger LDS and format the aggregate. Then, we
 
 #### 2- Using IDCAMS REPRO
 
-Second method is using IDCAMS utility to copy the physical blocks of a zFS aggregate to another. You can see the JCL below to do that.
+Second method is using IDCAMS utility to copy the physical blocks of a zFS aggregate to another. You can see the JCL below to do it. Again we need to allocate larger dataset first. Important thing is that do not format the new zFS data set before using the REPRO command. Since REPRO uses native VSAM calls to read and write the blocks, both file systems must not to be mounted.
 
+		//ZFSFCOPY JOB (VBT1),'OZGUR',NOTIFY=&SYSUID,                              
+		//         CLASS=A,MSGCLASS=X,MSGLEVEL=(1,1)                           
+		//DEFINE   EXEC   PGM=IDCAMS                                           
+		//SYSPRINT DD     SYSOUT=H                                             
+		//SYSIN    DD     *                                                    
+		     DEFINE CLUSTER (NAME(OZGUR.EXPAND2.ZFS) -                         
+			    LINEAR CYL(5 1) SHAREOPTIONS(3) -                          
+			    VOLUMES(USR001))                                           
+		/*                                                                     
+		//LCAT1    EXEC PGM=IDCAMS                                             
+		//SYSPRINT DD  SYSOUT=*                                                      
+		//SYSIN    DD  *                                                       
+			  LISTCAT ENTRIES(OZGUR.FIRST.ZFS) -                           
+				  ALL                                                  
+			  LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -                         
+				  ALL                                                  
+		/*                                                                     
+		//REPRO1   EXEC PGM=IDCAMS                                             
+		//SYSPRINT DD SYSOUT=H                                                 
+		//* THE NEXT LINE GUARANTEES THAT THE FILE SYSTEM IS NOT MOUNTED       
+		//IN1   DD DSN=OZGUR.FIRST.ZFS,DISP=OLD                                
+		//SYSIN DD *                                                           
+		  REPRO -                                                              
+		     INFILE(IN1) -                                                     
+		     OUTDATASET(OZGUR.EXPAND2.ZFS)                                     
+		/*                                                                     
+		//LCAT2    EXEC PGM=IDCAMS                                             
+		//SYSPRINT DD  SYSOUT=*                                                           
+		//* EQUAL TO THE HI-U-RBA OF OZGUR.FIRST.ZFS                           
+		//SYSIN    DD  *                                                       
+			  LISTCAT ENTRIES(OZGUR.FIRST.ZFS) -                           
+				  ALL                                                  
+			  LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -                         
+				  ALL                                                  
+		/*
+
+##### Before REPRO
+
+          LISTCAT ENTRIES(OZGUR.FIRST.ZFS) -                    
+                  ALL                                           
+CLUSTER ------- OZGUR.FIRST.ZFS                                 
+     IN-CAT --- CATALOG.USER.OZGUR                              
+     ASSOCIATIONS                                      
+       DATA-----OZGUR.FIRST.ZFS.DATA                                     
+     VOLUME                                                                                                              
+       VOLSER------------OZG001     PHYREC-SIZE---------4096     HI-A-RBA----------737280     EXTENT-NUMBER----------1   
+       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     HI-U-RBA----------737280     EXTENT-TYPE--------X'40'   
+       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                             
+       EXTENTS:                                                                                                          
+       LOW-CCHH-----X'00270000'     LOW-RBA----------------0     TRACKS----------------15                                
+       HIGH-CCHH----X'0027000E'     HIGH-RBA----------737279                                                             
+
+          LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -     
+                  ALL                              
+CLUSTER ------- OZGUR.EXPAND2.ZFS                  
+     IN-CAT --- CATALOG.USER.OZGUR 
+     ASSOCIATIONS	 
+       DATA-----OZGUR.EXPAND2.ZFS.DATA    
+     VOLUME                                                                                                                
+       VOLSER------------OZG001     PHYREC-SIZE---------4096     HI-A-RBA---------3686400     EXTENT-NUMBER----------1     
+       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     HI-U-RBA---------------0     EXTENT-TYPE--------X'40'     
+       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                               
+       EXTENTS:                                                                                                            
+       LOW-CCHH-----X'002F0000'     LOW-RBA----------------0     TRACKS----------------75                                  
+       HIGH-CCHH----X'0033000E'     HIGH-RBA---------3686399                                                               
+
+
+##### After REPRO
+
+
+          LISTCAT ENTRIES(OZGUR.FIRST.ZFS) -                  
+                  ALL                                         
+CLUSTER ------- OZGUR.FIRST.ZFS                               
+     IN-CAT --- CATALOG.USER.OZGUR                            
+     ASSOCIATIONS                      
+       DATA-----OZGUR.FIRST.ZFS.DATA   
+     VOLUME                                                                                                                 
+       VOLSER------------OZG001     PHYREC-SIZE---------4096     HI-A-RBA----------737280     EXTENT-NUMBER----------1      
+       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     HI-U-RBA----------737280     EXTENT-TYPE--------X'40'      
+       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                                
+       EXTENTS:                                                                                                             
+       LOW-CCHH-----X'00270000'     LOW-RBA----------------0     TRACKS----------------15                                   
+       HIGH-CCHH----X'0027000E'     HIGH-RBA----------737279                                                                
+	             LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -                 
+                  ALL                                          
+CLUSTER ------- OZGUR.EXPAND2.ZFS                              
+     IN-CAT --- CATALOG.USER.OZGUR                             
+     ASSOCIATIONS                        
+       DATA-----OZGUR.EXPAND2.ZFS.DATA   
+     VOLUME                                                                                                               
+       VOLSER------------OZG001     PHYREC-SIZE---------4096     HI-A-RBA---------3686400     EXTENT-NUMBER----------1    
+       DEVTYPE------X'3010200F'     PHYRECS/TRK-----------12     HI-U-RBA----------737280     EXTENT-TYPE--------X'00'    
+       VOLFLAG------------PRIME     TRACKS/CA-------------15                                                              
+       EXTENTS:                                                                                                           
+       LOW-CCHH-----X'002F0000'     LOW-RBA----------------0     TRACKS----------------75                                 
+       HIGH-CCHH----X'0033000E'     HIGH-RBA---------3686399                                                              
+
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/zOS%20UNIX%20File%20System%20and%20zFS%20Operations/ss/repro-copy-result.png)
 
 
 ## Grow a zFS
