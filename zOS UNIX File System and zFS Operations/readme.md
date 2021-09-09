@@ -258,7 +258,7 @@ Second method is using IDCAMS utility to copy the physical blocks of a zFS aggre
 
 You can see below the results of the IDCAMS LISTCAT steps from the job that OZGUR.EXPAND2.ZFS has a larger HI-A-RBA than OZGUR.FIRST.ZFS. After copy, the HI-A-RBA values of both are equal but the new aggregate can grow into the available space in the allocated portion of the data set or even extend to additional extents.
 
-**HI-U-RBA:** The high-used relative byte address indicates how many bytes were written by zFS.
+**HI-U-RBA:** The high-used relative byte address indicates how many bytes were written by zFS. </br>
 **HI-A-RBA:** The high-allocated relative byte address indicates how many bytes could be written by zFS into the current allocation.
 
 ##### Before REPRO
