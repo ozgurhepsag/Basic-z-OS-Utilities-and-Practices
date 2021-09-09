@@ -159,7 +159,66 @@ Use DFSMSdss logical restore to restore a zFS aggregate. The aggregate can be re
 		/*                                                                    
 		//                                                                    
 
+If you restore into a new data set, you can use it also by mount. For test purposes, I created dummy files and a directory under /u/ozgur/myzfs after mount OZGUR.FIRST.ZFS to there. Then, I dump OZGUR.FIRST.ZFS and restore to OZGUR.THIRD.ZFS. Lastly, I mounted OZGUR.THIRD.ZFS to /u/ozgur/myzfs2.
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/zOS%20UNIX%20File%20System%20and%20zFS%20Operations/ss/ls%20-al-myzfs.png)
+ 
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/zOS%20UNIX%20File%20System%20and%20zFS%20Operations/ss/ls%20-al-myzfs2.png)
+
 ## Copy zFS File System to Larger Data Set
+
+We can copy a zFS file system to a larger aggregate with shell pax command or physical copy by IDCAMS REPRO command.
+
+#### 1- Using PAX Shell Command 
+
+Firstly, we need to allocate a new larger LDS and format the aggregate. Then, we can copy from old aggregate to the new one.
+
+		//ZFSLCOPY JOB (VBT1),'OZGUR',NOTIFY=&SYSUID,         
+		//         CLASS=A,MSGCLASS=X,MSGLEVEL=(1,1)                         
+		//DEFINE   EXEC   PGM=IDCAMS                                         
+		//SYSPRINT DD     SYSOUT=*                                           
+		//SYSIN    DD     *                                                  
+		     DEFINE CLUSTER (NAME(OZGUR.EXPAND1.ZFS) -                       
+			    LINEAR CYL(5 1) SHAREOPTIONS(3) -                        
+			    VOLUMES(USR001 USR002))                                  
+		/*                                                                   
+		//FORMAT   EXEC   PGM=IOEAGFMT,REGION=0M,                            
+		// PARM=('-aggregate OZGUR.EXPAND1.ZFS -compat')                     
+		//SYSPRINT DD     SYSOUT=*                                               
+		//PAX1     EXEC PGM=IKJEFT01,REGION=0M                                   
+		//SYSTSPRT DD  SYSOUT=*                                                  
+		//SYSEXEC  DD  DSN=SYS1.SBPXEXEC,DISP=SHR                                
+		//SYSTSIN  DD  *                                                         
+		 OSHELL /usr/sbin/mount -t ZFS -f OZGUR.FIRST.ZFS                    +   
+		  /u/ozgur/myzfs                                                   ; +   
+		   /usr/sbin/mount -t ZFS -f OZGUR.EXPAND1.ZFS /u/ozgur/myzfs2     ; +   
+		   cd /u/ozgur/myzfs                                               ; +   
+		   pax -rwvCMX -p eW . /u/ozgur/myzfs2                             ;     
+		/*                                                                                       
+		//AGGRINF1 EXEC PGM=IOEZADM,REGION=0M,                                   
+		// PARM=('aggrinfo OZGUR.FIRST.ZFS -long')                               
+		//SYSPRINT DD  SYSOUT=*                                                  
+		//STDOUT   DD  SYSOUT=*                                                  
+		//STDERR   DD  SYSOUT=*                                                  
+		//SYSUDUMP DD  SYSOUT=*                                                  
+		//CEEDUMP  DD  SYSOUT=*                                                  
+		/*                                                                       
+		//AGGRINF2 EXEC PGM=IOEZADM,REGION=0M,                    
+		// PARM=('aggrinfo OZGUR.EXPAND1.ZFS -long')              
+		//SYSPRINT DD  SYSOUT=*                                   
+		//STDOUT   DD  SYSOUT=*                                   
+		//STDERR   DD  SYSOUT=*                                   
+		//SYSUDUMP DD  SYSOUT=*                                   
+		//CEEDUMP  DD  SYSOUT=*                                   
+		/*                                                        
+
+'pax' shell command (pax command ) copies the all files and directories into an already formatted and empty zFS file system. Both file systems must be mounted. After the data was copied succesfully, the old aggregate can be deleted and used when you are comfortable with the new larger aggregate. You can see below that the new zFS has more available space (the result of the last two steps to check the new and the old aggregate space information).
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/zOS%20UNIX%20File%20System%20and%20zFS%20Operations/ss/pax-copy-result.png)
+
+#### 2- Using IDCAMS REPRO
+
+Second method is using IDCAMS utility to copy the physical blocks of a zFS aggregate to another. You can see the JCL below to do that.
 
 
 
