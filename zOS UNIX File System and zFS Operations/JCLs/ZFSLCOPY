@@ -1,0 +1,51 @@
+//ZFSLCOPY JOB (VBT1),'OZGUR',NOTIFY=&SYSUID,         
+//         CLASS=A,MSGCLASS=X,MSGLEVEL=(1,1)                         
+//DEFINE   EXEC   PGM=IDCAMS                                         
+//SYSPRINT DD     SYSOUT=*                                           
+//SYSIN    DD     *                                                  
+     DEFINE CLUSTER (NAME(OZGUR.EXPAND1.ZFS) -                       
+            LINEAR CYL(5 1) SHAREOPTIONS(3) -                        
+            VOLUMES(USR001 USR002))                                  
+/*                                                                   
+//FORMAT   EXEC   PGM=IOEAGFMT,REGION=0M,                            
+// PARM=('-aggregate OZGUR.EXPAND1.ZFS -compat')                     
+//SYSPRINT DD     SYSOUT=*                                           
+//*******************************************************************
+//**                                                               **
+//**  NOTE - USE A + SIGN AT THE END OF EACH LINE TO INDICATE THERE**
+//**         IS ANOTHER LINE TO BE PROCESSED.                      **
+//**         USE A ; AT THE END OF EACH COMMAND                    **
+//**                                                               **
+//**         A SINGLE COMMAND CAN SPAN MULTIPLE LINES IF EACH LINE **
+//**         ENDS IN A +.  WHEN YOU HAVE REACHED THE END OF THE    **
+//**         COMMAND, TERMINATE THE COMMAND WITH A ;               **
+//**                                                               **    
+//*******************************************************************    
+//PAX1     EXEC PGM=IKJEFT01,REGION=0M                                   
+//SYSTSPRT DD  SYSOUT=*                                                  
+//SYSEXEC  DD  DSN=SYS1.SBPXEXEC,DISP=SHR                                
+//SYSTSIN  DD  *                                                         
+ OSHELL /usr/sbin/mount -t ZFS -f OZGUR.FIRST.ZFS                    +   
+  /u/ozgur/myzfs                                                   ; +   
+   /usr/sbin/mount -t ZFS -f OZGUR.EXPAND1.ZFS /u/ozgur/myzfs2     ; +   
+   cd /u/ozgur/myzfs                                               ; +   
+   pax -rwvCMX -p eW . /u/ozgur/myzfs2                             ;     
+/*                                                                       
+//* THE RESULT OF THESE NEXT TWO STEPS SHOULD SHOW THAT                  
+//* MORE FREE SPACE IS AVAILABLE IN THE NEW FILE SYSTEM                  
+//AGGRINF1 EXEC PGM=IOEZADM,REGION=0M,                                   
+// PARM=('aggrinfo OZGUR.FIRST.ZFS -long')                               
+//SYSPRINT DD  SYSOUT=*                                                  
+//STDOUT   DD  SYSOUT=*                                                  
+//STDERR   DD  SYSOUT=*                                                  
+//SYSUDUMP DD  SYSOUT=*                                                  
+//CEEDUMP  DD  SYSOUT=*                                                  
+/*                                                                       
+//AGGRINF2 EXEC PGM=IOEZADM,REGION=0M,                    
+// PARM=('aggrinfo OZGUR.EXPAND1.ZFS -long')              
+//SYSPRINT DD  SYSOUT=*                                   
+//STDOUT   DD  SYSOUT=*                                   
+//STDERR   DD  SYSOUT=*                                   
+//SYSUDUMP DD  SYSOUT=*                                   
+//CEEDUMP  DD  SYSOUT=*                                   
+/*                                                        

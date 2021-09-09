@@ -1,0 +1,37 @@
+//ZFSFCOPY JOB (VBT1),'OZGUR',NOTIFY=&SYSUID,                              
+//         CLASS=A,MSGCLASS=X,MSGLEVEL=(1,1)                           
+//DEFINE   EXEC   PGM=IDCAMS                                           
+//SYSPRINT DD     SYSOUT=H                                             
+//SYSIN    DD     *                                                    
+     DEFINE CLUSTER (NAME(OZGUR.EXPAND2.ZFS) -                         
+            LINEAR CYL(5 1) SHAREOPTIONS(3) -                          
+            VOLUMES(USR001))                                           
+/*                                                                     
+//LCAT1    EXEC PGM=IDCAMS                                             
+//SYSPRINT DD  SYSOUT=*                                                
+//* THIS STEP SHOULD SHOW A HI-U-RBA OF 0 FOR OZGUR.EXPAND2.ZFS        
+//SYSIN    DD  *                                                       
+          LISTCAT ENTRIES(OZGUR.FIRST.ZFS) -                           
+                  ALL                                                  
+          LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -                         
+                  ALL                                                  
+/*                                                                     
+//REPRO1   EXEC PGM=IDCAMS                                             
+//SYSPRINT DD SYSOUT=H                                                 
+//* THE NEXT LINE GUARANTEES THAT THE FILE SYSTEM IS NOT MOUNTED       
+//IN1   DD DSN=OZGUR.FIRST.ZFS,DISP=OLD                                
+//SYSIN DD *                                                           
+  REPRO -                                                              
+     INFILE(IN1) -                                                     
+     OUTDATASET(OZGUR.EXPAND2.ZFS)                                     
+/*                                                                     
+//LCAT2    EXEC PGM=IDCAMS                                             
+//SYSPRINT DD  SYSOUT=*                                                
+//* THIS STEP SHOULD SHOW THE HI-U-RBA OF OZGUR.EXPAND2.ZFS            
+//* EQUAL TO THE HI-U-RBA OF OZGUR.FIRST.ZFS                           
+//SYSIN    DD  *                                                       
+          LISTCAT ENTRIES(OZGUR.FIRST.ZFS) -                           
+                  ALL                                                  
+          LISTCAT ENTRIES(OZGUR.EXPAND2.ZFS) -                         
+                  ALL                                                  
+/*                                                                                                                           
