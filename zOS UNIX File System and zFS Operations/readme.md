@@ -326,6 +326,14 @@ You can see below the results of the IDCAMS LISTCAT steps from the job that OZGU
 
 ## Grow a zFS
 
+If your zFS file system becomes full or you just want more space on your file system, you (as an administrator) can use **zfsadm grow** shell command. To do it, there must be space available on the volume to extend the aggregate’s VSAM linear data set. Also, the size that is specified on the zfsadm grow command must be larger than the current size of the aggregate.
+
+In our case I wanted to grow OZGUR.FIRST.ZFS. First, I checked the current size of the zFS and then I enter the zfsadm grow command with larger than the current size.
+
+		zfsadm grow OZGUR.FIRST.ZFS -size 721
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/zOS%20UNIX%20File%20System%20and%20zFS%20Operations/ss/zfsadm-grow.png)
+
 ## References
 
 https://www.ibm.com/docs/en/zos/2.4.0?topic=zag-creating-managing-zfs-file-systems-using-compatibility-mode-aggregates </br>
