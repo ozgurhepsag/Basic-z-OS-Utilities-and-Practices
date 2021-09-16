@@ -210,6 +210,14 @@ SET PROD=xx
 T PROD=xx
 
 D NET,E,ID=[id]
+V NET,ACT,ID=[id]
+V NET,ACT,UPDATE=ALL,ID=[id]
+Z NET,QUICK
+
+V TCPIP,,OBEYFILE
+V TCPIP,,O,DSN=SYS1.TCPPARMS(PROFNAME)
+V TCPIP,,OSAINFO
+V TCPIP,,SYNTAXCHECK
 
 RO *ALL,[command]    => Route commands to all systems in the sysplex
 RO *OTHER,[]
