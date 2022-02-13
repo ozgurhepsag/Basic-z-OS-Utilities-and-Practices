@@ -2,6 +2,8 @@ These operator commands are the commands that I use frequently. I will add more 
 
 D A,L
 D R,R
+D R,L            => Display the system requests
+D TS,L           => Display TSO users logged on to the system
 
 D IPLINFO
 D IOS,CONFIG     => Display if HyperPAV is active
@@ -29,6 +31,7 @@ D M=ASM
 D SMS
 D SMS,SG(ALL)
 D SMS,VOL(volser)
+D SMS,STORGRP(ALL),LISTVOL       => Display the storage groups and volumes
 
 DISPLAY SMF
 DISPLAY SMF,O
@@ -40,7 +43,8 @@ SETLOGRC LOGSTREAM
 SETLOGRC DATASET
 
 DISPLAY LOGGER
-D LOGGER,LOGSTREAM    =>  Display logstream sysplex information
+D LOGGER,LOGSTREAM    =>  Display logstream sysplex informationa
+D LOGGER,L
 D LOGGER,LOGSTREAM,LSNAME=[lsname]
 D LOGGER,STR   =>  Display logstreams defined to any structure  
 D LOGGER,CONNECTION  =>  Display all logstreams with connections to the system
@@ -88,6 +92,7 @@ DS S,xxxx
 D PROG,LNKLST
 D PROG,LNKLST,NAMES 
 D PROG,APF
+D PROG,EXIT
 SET PROG=xx
 SETPROG LNKLST,UPDATE,JOB=*
 SETPROG LNKLST,UNDEFINE,LNKLSTxx
@@ -126,10 +131,12 @@ F CATALOG,TASKMAX(nnn)     => Specifies the maximum number of CAS service tasks 
 F CATALOG,VVDSSPACE(primary,secondary)  => Indicates that the Catalog Address Space should use the values specified as the primary and secondary allocation amount in tracks for an implicitly defined VVDS
 F CATALOG,RESTART   => Specifies that CAS is to be restarted in a new address space
 
+D T           => Displat time and date
 D ETR         => Display the status of STP or the Sysplex Timer
 D CF
 
-D ASM
+D ASM         => Display usage of the Auxiliary Storage Manager
+D ASM,PAGE=ALL
 
 D OMVS
 D OMVS,F          => Display mounted file systems and associated mount points
@@ -149,19 +156,16 @@ SETOMVS SYNTAXCHECK=(xx)
 SETOMVS FILESYS,FILESYSTEM='POSIX.PAYROLL.ZFS',SYSNAME=SY2  => To move ownership of the file system from the current owner 
 SETOMVS FILESYS,mountpoint='/PAYROLL',SYSNAME=SY2 
 
-MODIFY BPXOINIT,FILESYS=DISPLAY   => Display the system information that is in the OMVS CDS
-MODIFY BPXOINIT,FILESYS=DISPLAY,ALL
-F BPXOINIT,SHUTDOWN=FILESYS       => To unmount all active file systems
+MODIFY BPXOINIT,FILESYS=DISPLAY       => Display the system information that is in the OMVS CDS
+MODIFY BPXOINIT,FILESYS=DISPLAY,ALL   => Display file system information in CDS
+F BPXOINIT,SHUTDOWN=FILESYS           => To unmount all active file systems
 
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
 F ZFS,QUERY,SETTINGS    => Display all the current settings of the zFS kernel
 F ZFS,QUERY,LEVEL       => Display the value of the SYSPLEX setting currently in use for zFS (SYSPLEX_FILESYS_SHAREMODE)
 F ZFS,QUERY,FILE        => Indicates if zFS RW sysplex sharing is being used for the file system.
-F ZFS,STOPPFS=ZFS
-
-MODIFY BPXOINIT,FILESYS=DISPLAY          => Display system information in CDS
-MODIFY BPXOINIT,FILESYS=DISPLAY,ALL      => Display file system information in CDS
+F ZFS,STOPPFS=ZFS    
 
 D GRS
 D GRS,C       => Display GRS contention information
@@ -209,11 +213,15 @@ D PROD,REGISTERED
 SET PROD=xx
 T PROD=xx
 
+D NET,MAJNOODES
 D NET,E,ID=[id]
 V NET,ACT,ID=[id]
 V NET,ACT,UPDATE=ALL,ID=[id]
 Z NET,QUICK
+Z NET,CANCEL
 
+D TCPIP
+D TCPIP,,NETSTAT,HOME
 V TCPIP,,OBEYFILE
 V TCPIP,,O,DSN=SYS1.TCPPARMS(PROFNAME)
 V TCPIP,,OSAINFO
