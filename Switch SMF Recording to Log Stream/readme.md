@@ -90,8 +90,7 @@ IBM recommends that you plan your high level qualifier carefully and add an alia
         VOLUME(LOGR01) -                                                 
         MEGABYTES(15 5) -                                                
         ICFCATALOG -                                                     
-        STRNO(3) -                                                       
-        REPLICATE ) -                                                    
+        STRNO(3) ) -                                                    
         DATA( CONTROLINTERVALSIZE(4096) -                                
         BUFND(4) ) -                                                     
         INDEX( CONTROLINTERVALSIZE (4096) -                              
