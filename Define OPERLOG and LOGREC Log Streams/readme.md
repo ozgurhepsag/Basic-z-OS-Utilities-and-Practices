@@ -56,6 +56,8 @@ Hardcopy medium have to be changed manually with 'VARY OPERLOG,HARDCPY' command,
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Define%20OPERLOG%20and%20LOGREC%20Log%20Streams/Images/v%20operlog%2Chardcpy.png)
 
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Define%20OPERLOG%20and%20LOGREC%20Log%20Streams/Images/D%20LOGGER%20Operlog%202.png)
+
 Now, OPERLOG can be used by entering 'LOG' command from SDSF.
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Define%20OPERLOG%20and%20LOGREC%20Log%20Streams/Images/OPERLOG.png)
