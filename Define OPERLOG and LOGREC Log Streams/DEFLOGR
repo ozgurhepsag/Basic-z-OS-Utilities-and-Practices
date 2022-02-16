@@ -1,0 +1,17 @@
+//DEFLOGRO JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)             
+//DEFINELS EXEC PGM=IXCMIAPU                   
+//SYSPRINT DD   SYSOUT=*                       
+//SYSABEND DD   SYSOUT=*                       
+//SYSIN    DD   *                              
+     DATA TYPE(LOGR) REPORT(YES)               
+     DEFINE LOGSTREAM NAME(SYSPLEX.OPERLOG)    
+          HLQ(IXGLOGR)                         
+          DASDONLY(YES)                        
+          LS_SIZE(128000)                      
+          STG_SIZE(64000)                      
+          LOWOFFLOAD(0)                        
+          HIGHOFFLOAD(80)                      
+          STG_DUPLEX(YES)                      
+          RETPD(180)                           
+          AUTODELETE(YES)                      
