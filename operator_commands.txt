@@ -28,6 +28,9 @@ D M=CPU
 D M=STOR
 D M=ASM
 
+CF CPU(id),ONLINE
+CF CPU(id),OFFLINE
+
 D SMS
 D SMS,SG(ALL)
 D SMS,VOL(volser)
@@ -37,6 +40,9 @@ DISPLAY SMF
 DISPLAY SMF,O
 DISPLAY SMF,M    =>  Display the record types that are being collected.
 SET SMF=xx
+SWITCH SMF (i smf)
+
+D SMFLIM,R
 
 D LOGREC
 SETLOGRC LOGSTREAM
@@ -77,9 +83,10 @@ D C            =>   Display consoles
 V OPERLOG,HARDCPY
 V OPERLOG,HARDCPY,OFF
 D C,HC,L=Z 
-D C,HC
+D C,HC 
+D C,LIST 
 
-SWITCH SMF (i smf)
+DISPLAY EMCS
 
 DISPLAY M=DEV(xxx)
 DISPLAY M=CHP(cc)
@@ -106,6 +113,11 @@ D LLA,STATS
 D LLA,STATS,LIBRARY=dsn,MEMBER=member,FETCHED
 
 D DIAG
+
+F HZR,ANALYZE
+
+F HZSPROC,REFRESH,CHECK=(IBMCSV,CSV_APF_EXISTS)
+F HZSPROC,RUN,CHECK=(IBMCSV,CSV_APF_EXISTS) 
 
 F CATALOG,OPEN  => List all catalogs
 MODIFY CATALOG,ALLOCATED   => Allocated catalogs (same output with F CATALOG,OPEN)
@@ -155,6 +167,7 @@ MODIFY OMVS,RESTART   => Restarts and reinitializes the z/OS UNIX environment
 SETOMVS SYNTAXCHECK=(xx)
 SETOMVS FILESYS,FILESYSTEM='POSIX.PAYROLL.ZFS',SYSNAME=SY2  => To move ownership of the file system from the current owner 
 SETOMVS FILESYS,mountpoint='/PAYROLL',SYSNAME=SY2 
+SET OMVS=FS
 
 MODIFY BPXOINIT,FILESYS=DISPLAY       => Display the system information that is in the OMVS CDS
 MODIFY BPXOINIT,FILESYS=DISPLAY,ALL   => Display file system information in CDS
@@ -205,6 +218,9 @@ $JDSTATUS
 $JDMONITOR
 $CJ(xxx)
 $CJ(xxx),P
+$TA,ALL             => Display the automatic commands currently in effect
+$TA,T=15.45,'$VS,''D A'''    => Specify a new command or series of commands for automatic processing
+$CA[id]             => Cancel automatic commands
 
 S JES2,PARM=(CHECK),SYSOUT=A,SUB=JES2
 
@@ -215,6 +231,7 @@ T PROD=xx
 
 D NET,MAJNOODES
 D NET,E,ID=[id]
+D NET,TRL
 V NET,ACT,ID=[id]
 V NET,ACT,UPDATE=ALL,ID=[id]
 Z NET,QUICK
