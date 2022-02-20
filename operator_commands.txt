@@ -45,6 +45,7 @@ SWITCH SMF (i smf)
 D SMFLIM,R
 
 D LOGREC
+D LOGREC,ALL
 SETLOGRC LOGSTREAM
 SETLOGRC DATASET
 
@@ -162,6 +163,8 @@ D OMVS,PID=nnnn   => Display the status of an individual process and threads run
 D OMVS,OPTIONS
 D OMVS,PFS        => Display Physical File System information
 D OMVS,MF         => Display the 10 most recent mount failures
+D OMVS,U=[userid]
+D OMVS,MF         => Display information about move or mount failures
 MODIFY OMVS,SHUTDOWN  => Stops z/OS UNIX processes
 MODIFY OMVS,RESTART   => Restarts and reinitializes the z/OS UNIX environment
 SETOMVS SYNTAXCHECK=(xx)
