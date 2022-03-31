@@ -21,6 +21,7 @@ D U,,,3200
 D U,,,3200,3
 D U,,ONLINE     => Display all online devices
 V 3200,[ONLINE || OFFLINE]
+V 0D00-0D64,OFFLINE 
 V 0700,CONSOLE  => Make console the device that have 0700 address.
 
 D M
@@ -53,6 +54,7 @@ SETLOGRC LOGSTREAM
 SETLOGRC DATASET
 
 DISPLAY LOGGER
+D LOGGER,STATUS
 D LOGGER,LOGSTREAM    =>  Display logstream sysplex informationa
 D LOGGER,L
 D LOGGER,LOGSTREAM,LSNAME=[lsname]
@@ -127,6 +129,7 @@ F HZR,ANALYZE
 
 F HZSPROC,REFRESH,CHECK=(IBMCSV,CSV_APF_EXISTS)
 F HZSPROC,RUN,CHECK=(IBMCSV,CSV_APF_EXISTS) 
+F HZSPROC,DISPLAY,CHECKS
 
 F CATALOG,OPEN  => List all catalogs
 MODIFY CATALOG,ALLOCATED   => Allocated catalogs (same output with F CATALOG,OPEN)
@@ -184,7 +187,9 @@ MODIFY BPXOINIT,FILESYS=DISPLAY       => Display the system information that is 
 MODIFY BPXOINIT,FILESYS=DISPLAY,ALL   => Display file system information in CDS
 F BPXOINIT,SHUTDOWN=FILESYS           => To unmount all active file systems
 F BPXOINIT,SHUTDOWN=FORKINIT
-f BPXOINIT,TERM=[pid]
+F BPXOINIT,TERM=[pid]
+F BPXOINIT,FORCE=[pid]
+F BPXOINIT,RECOVER=LATCHES
 
 F ZFS,FSINFO,ALL
 F ZFS,QUERY,STATUS
@@ -261,6 +266,9 @@ D SLIP=[slipid]
 D SLIP
 SET SLIP=xx
 
+D SSI
+D SSI,SUB=LOGR
+
 RO *ALL,[command]    => Route commands to all systems in the sysplex
 RO *OTHER,[]
 RO sysname,[command]
@@ -271,3 +279,6 @@ F TSO,USERMAX=1
 F TCAS,USERMAX=#
 
 C U=[userid]
+
+SETLOAD xx,PARMLIB,DSN=SYS1.IPLPARM,VOL=volser
+SETLOAD xx,IEASYM,DSN=SYS1.IPLPARM,VOL=volser
