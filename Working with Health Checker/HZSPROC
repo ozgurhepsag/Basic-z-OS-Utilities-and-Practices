@@ -1,0 +1,6 @@
+//HZSPROC  PROC HZSPRM='00'                           
+//HZSSTEP  EXEC   PGM=HZSINIT,REGION=0K,TIME=NOLIMIT, 
+//      PARM='SET PARMLIB=&HZSPRM'                    
+//HZSPDATA DD   DSN=SYS1.VBT1.HZSPDATA,DISP=OLD       
+//        PEND                                        
+//        EXEC HZSPROC                                
