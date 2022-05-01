@@ -1,6 +1,6 @@
 ## Working with Health Checker
 
-I practise on a monoplex sandbox z/OS system that has no CICS, DB2, IMS, MQ or any ISV products. I wanted to some basic things on the z/OS Health Checker.
+I practise on a monoplex sandbox z/OS system that has no CICS, DB2, IMS, MQ or any ISV products. I wanted to some basic things on the IBM Health Checker.
 </br> </br>
 The objective of IBM Health Checker for z/OS is to identify potential problems before they impact your availability. If you omit the output of the checks, even outage could be happened. Firstly, I want to learn about the configuration of the Health Checker on my system.
 
@@ -20,8 +20,10 @@ It uses HZSPRM00 member in my PARMLIB to start address space. However in my syst
 ### HZSPRMxx Member
 
 I want to add a few statements about Logstream for storing some check records and a policy update. 
-</br> </br>
-If you want to retain a historical record of check results, which is optional, but a good idea, you can define and connect to a log stream. When you have a log stream connected, the system writes check results to the log stream every time a check completes.
+
+#### HZS Logstream
+
+If you want to retain a historical record of check results, which is optional, but a good idea, you can define and connect to a log stream. When you have a log stream connected, the system writes check results to the log stream every time a check completes. Name of that logstream must start with 'HZS'.
 
     //DEFLOGRC JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,       
     //   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                             
@@ -40,7 +42,6 @@ If you want to retain a historical record of check results, which is optional, b
               RETPD(180)                                           
               AUTODELETE(YES)  
 
-
 I made a plan for setting up a DASD log stream, then activate it.
 
     F HZSPROC,LOGGER=ON,LOGSTREAMNAME=HZS.HEALTH.CHECKER.HISTORY 
@@ -58,8 +59,40 @@ I made a plan for setting up a DASD log stream, then activate it.
     M 0000000 VBT1     22121 21:20:22.25 STC05049 00000090  HZS0344I THE LOGGER REQUEST HAS COMPLETED. 604                          
     E                                         604 00000090  LOG STREAM HZS.HEALTH.CHECKER.HISTORY IS CONNECTED                      
 
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Working%20with%20Health%20Checker/Images/HZS%20logstream%20list.png)
+
 I added the statement below to make this change permanent. 
 
     LOGGER=ON,LOGSTREAMNAME=HZS.HEALTH.CHECKER.HISTORY 
 
+Normally before this change, when you type 'L' (ListHistory) line command from CK panel on SDSF, it is not available. Now, after adding and activating the HZS logstream you can see the history of the specified check.
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Working%20with%20Health%20Checker/Images/Check%20History.png)
                                     
+#### Update Policy
+
+Because I am working on a monoplex sandbox environment, I don't want to see the XCF_CDS_SPOF check as critical exception on my log and CK panel.
+</br> </br>
+I see the 'XCF_CDS_SPOF' check in the console and SYSLOG as below.
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Working%20with%20Health%20Checker/Images/XCF_CDS_SPOF%20before.png)
+
+I do not want to see this check like that in my console. It also sticks on my console until I delete it. Therefor, I update the policy for that check like below in my HZSPRM parmlib member.
+
+       ADDREPLACE POLICY STMT(SYSLOG01)              
+         UPDATE CHECK(IBMXCF,XCF_CDS_SPOF)           
+         WTOTYPE(INFORMATIONAL)                      
+         REASON('Sandbox System')                    
+         DATE(20220501)                              
+
+Then I entered the command below to make this change.
+
+    F HZSPROC,REPLACE,PARMLIB=00 (or F HZSPROC,ADD,PARMLIB=xx)
+
+Now I don't see XCF_CDS_SPOF check as red WTO message in my console.
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Working%20with%20Health%20Checker/Images/XCF_CDS_SPOF%20after.png)
+
+## References
+
+https://www.ibm.com/docs/en/zos/2.3.0?topic=guide-using-health-checker-zos </br>
