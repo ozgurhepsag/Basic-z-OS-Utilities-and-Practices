@@ -1,0 +1,16 @@
+//DEFLOGRC JOB  (),'OZGUR',CLASS=A,MSGCLASS=H,REGION=0M,       
+//   NOTIFY=&SYSUID,MSGLEVEL=(1,1)                             
+//DEFINELS EXEC PGM=IXCMIAPU                                   
+//SYSPRINT DD   SYSOUT=*                                       
+//SYSABEND DD   SYSOUT=*                                       
+//SYSIN    DD   *                                              
+     DATA TYPE(LOGR) REPORT(YES)                               
+     DEFINE LOGSTREAM NAME(HZS.HEALTH.CHECKER.HISTORY)         
+          DASDONLY(YES)                                        
+          MAXBUFSIZE(65532)                                    
+          HIGHOFFLOAD(80)                                      
+          LOWOFFLOAD(20)                                       
+          STG_SIZE(64000)                                      
+          LS_SIZE(32000)                                       
+          RETPD(180)                                           
+          AUTODELETE(YES)                                      
