@@ -1,6 +1,6 @@
 ## Working with Health Checker
 
-I practise on a monoplex sandbox z/OS system that has no CICS, DB2, IMS, MQ or any ISV products. I wanted to some basic things on the IBM Health Checker.
+I practise on a monoplex sandbox z/OS system that has no CICS, DB2, IMS, MQ or any ISV products. I wanted to do some basic things on the IBM Health Checker.
 </br> </br>
 The objective of IBM Health Checker for z/OS is to identify potential problems before they impact your availability. If you omit the output of the checks, even outage could be happened. Firstly, I want to learn about the configuration of the Health Checker on my system.
 
