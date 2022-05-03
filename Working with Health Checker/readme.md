@@ -71,13 +71,13 @@ Normally before this change, when you want to type 'L' (ListHistory) line comman
                                     
 #### Update Policy
 
-Because I am working on a monoplex sandbox environment, I don't want to see the XCF_CDS_SPOF check as a critical exception on my log and console.
+Because I am working on a monoplex sandbox environment, I don't want to see the XCF_CDS_SPOF check as a red WTOR on my log and console.
 </br> </br>
 I see the 'XCF_CDS_SPOF' check in the console and SYSLOG as below.
 
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Working%20with%20Health%20Checker/Images/XCF_CDS_SPOF%20before.png)
 
-I do not want to see this check like that in my console. It also sticks on my console until I delete it or resolve the check. Therefore, I updated the policy for that check like below in my HZSPRM parmlib member.
+I do not want to see this check like that in my console. It also sticks on my console until I delete it (or resolve the check). Therefore, I updated the policy for that check like below in my HZSPRM parmlib member.
 
        ADDREPLACE POLICY STMT(SYSLOG01)              
          UPDATE CHECK(IBMXCF,XCF_CDS_SPOF)           
