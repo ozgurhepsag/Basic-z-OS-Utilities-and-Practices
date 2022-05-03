@@ -1,0 +1,96 @@
+/* ---------------------------------------------------------------- */
+/*                                                                  */
+/*   LICENSED MATERIALS - PROPERTY OF IBM                           */
+/*   5694-A01                                                       */
+/*   (C) COPYRIGHT IBM CORP. 2004, 2005                             */
+/*                                                                  */
+/* ---------------------------------------------------------------- */
+/* The LOGGER command and POLICY statements can be used in HZSPRMxx */
+/* to enable logger support, and change the default behavior of     */
+/* target checks.   Common syntax of both the LOGGER and POLICY     */
+/* statements are documented below.                                 */
+/* For a complete syntax of the LOGGER command, POLICY statements,  */
+/* and other commands that can be specified in the HZSPRMxx system  */
+/* parmlib members, see the                                         */
+/* IBM Health Checker for z/OS and Sysplex User's Guide             */
+/* ---------------------------------------------------------------- */
+/*                                                                  */
+/* LOGGER=ON,LOGSTREAMNAME=HZS.HEALTH.CHECKER.HISTORY               */
+/*                                                                  */
+/*   can be used to enable log stream processing to the specified   */
+/*   log stream                                                     */
+/*                                                                  */
+/*                                                                  */
+/* {ADD / ADDREPLACE},POLICY,STATEMENT=statementname,UPDATE,filters,*/
+/*        update_options,REASON=(reason text),DATE=yyyymmdd         */
+/*                                                                  */
+/*   can be used to define policy statements that modify the        */
+/*   behavior of specified checks.                                  */
+/*                                                                  */
+/* Where                                                            */
+/*   ADD -     This is a new policy statement that is not active.   */
+/*             If the named policy statement is already active, the */
+/*             new policy statement is rejected.                    */
+/*   ADDREPLACE - The specified policy statement may already be     */
+/*             active.                                              */
+/*             If the policy statement is already active, the       */
+/*             existing policy statement is replaced.               */
+/*   statementname - 1-16 character policy statement name used to   */ 
+/*             identify the policy statement.                       */ 
+/*   UPDATE -  Indicates the policy statement overrides check       */ 
+/*             defaults                                             */ 
+/*   filters - Filters that indicate which check(s) are targeted by */ 
+/*             this policy statement:                               */ 
+/*             CHECK(owner,name) - (Required.) The 1-6 character    */ 
+/*                                 check owner, and 1-32 character  */ 
+/*                                 check name.  Wild card symbols   */ 
+/*                                 '*' and '%' are permitted.       */ 
+/*             [CATEGORY([filter_type,] category-1[,category-2]...) */ 
+/*                Allows additional filter capacity based on the    */ 
+/*                current assigned categories                       */ 
+/*             [EXITRTN=exitrtn] - The name of the HZSADDCHECK      */ 
+/*                                 dynamic exit routine that was    */ 
+/*                                 used to add the check.           */ 
+/*   Update_options-The options used to override the check          */ 
+/*             defaults:                                            */ 
+/*             [,ACTIVE/INACTIVE]                                   */ 
+/*                Indicates the target check(s) are ACTIVE or       */ 
+/*                INACTIVE.                                         */ 
+/*             [,ADDCAT=(cat1,...,cat16)]                           */ 
+/*                Add the target check(s) to the specified          */ 
+/*                categories                                        */ 
+/*             [,DESCCODE=(desccode1,...,desccode#)]                */ 
+/*                Additional descriptor code(s) which will be used  */ 
+/*                when an exception message is written by the       */ 
+/*                target check(s)                                   */ 
+/*             [,{INTERVAL=ONETIME/INTERVAL=hhh:mm}]                */ 
+/*                The interval at which the target check(s) will    */ 
+/*                be run.                                           */ 
+/*             [,PARM=parameter]                                    */ 
+/*                The check specific parameter that will be passed  */ 
+/*                to the target check.                              */ 
+/*             [,ROUTCODE=(routcode1[,..,routcode#])]               */ 
+/*                Additional route code(s) which will be used when  */ 
+/*                an exception message is written by the target     */ 
+/*                check(s)                                          */ 
+/*             [,SEVERITY={HIGH/MEDIUM/LOW/NONE}]                   */
+/*                The severity of target check(s)                   */
+/*             [,WTOTYPE={CRITICAL/EVENTUAL/                        */
+/*                        INFORMATIONAL/HARDCOPY/NONE}]             */
+/*                Specifies what message will be used when an       */
+/*                exception message is written by the target        */
+/*                check(s).  Note: If WTOTYPE is not specified,     */
+/*                the message is determined by the check severity.  */
+/*   REASON -  1-126 character reason that documents why the policy */
+/*             statement statement was added to HZSPRMxx.           */
+/*   DATE   -  (yyyymmdd) The date when the policy statement was    */
+/*             added to HZSPRMxx.                                   */
+/*                                                                  */
+/* ---------------------------------------------------------------- */
+   LOGGER=ON,LOGSTREAMNAME=HZS.HEALTH.CHECKER.HISTORY
+   
+   ADDREPLACE POLICY STMT(SYSLOG01)              
+     UPDATE CHECK(IBMXCF,XCF_CDS_SPOF)           
+     WTOTYPE(INFORMATIONAL)                      
+     REASON('Sandbox System')                    
+     DATE(20220501)
