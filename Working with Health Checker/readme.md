@@ -85,7 +85,7 @@ I do not want to see this check like that in my console. It also sticks on my co
          REASON('Sandbox System')                    
          DATE(20220501)                              
 
-Then, I entered the command below to make this change.
+Then, I entered the command below to make this change permanent.
 
     F HZSPROC,REPLACE,PARMLIB=00 (or F HZSPROC,ADD,PARMLIB=xx)
 
