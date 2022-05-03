@@ -4,6 +4,20 @@ I practise on a monoplex sandbox z/OS system that has no CICS, DB2, IMS, MQ or a
 </br> </br>
 The objective of IBM Health Checker for z/OS is to identify potential problems before they impact your availability. If you omit the output of the checks, even outage could happen. Firstly, I want to learn about the configuration of the Health Checker on my system.
 
+### Security Definitions 
+
+Before start working, I made a generic security definition for my user (OZGUR) which belongs to SYS1 group. You can see below the RACF commands that I entered.
+
+    PERMIT HZS.** CLASS(XFACILIT) ID(SYS1) ACCESS(CONTROL)
+    SETROPTS RACLIST(XFACILIT) REFRESH
+    RL XFACILIT HZS.** ALL  
+
+If you don't have a proper access on XFACILIT resource, you can get the error message about your security access while you want to do something on the Health Checker. For example, when I wanted to refresh a check before security definition, I got the message below.
+
+![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Working%20with%20Health%20Checker/Images/HZS%20sec.png)
+
+Access Allowed for me was READ because in my environment HZS.** profile has UACC(READ).
+
 ### HZSPROC Address Space
 
 With a system address space called HZSPROC, Health Check services is provided. So, HZSPROC must be located in your PROCLIB. Here is my HZSPROC member.
