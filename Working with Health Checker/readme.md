@@ -17,6 +17,8 @@ If you don't have a proper access on XFACILIT resource, you can get the error me
 ![Screenshot](https://github.com/ozgurhepsag/Basic-z-OS-Utilities-and-Practices/blob/main/Working%20with%20Health%20Checker/Images/HZS%20sec.png)
 
 Access Allowed for me was READ because in my environment HZS.** profile has UACC(READ).
+</br> </br>
+There are also lots of security definitions that must be made that you can find from [IBM Knowledge Center](https://www.ibm.com/docs/en/zos/2.3.0?topic=csd-setting-up-security-health-checker-zos-started-task).
 
 ### HZSPROC Address Space
 
